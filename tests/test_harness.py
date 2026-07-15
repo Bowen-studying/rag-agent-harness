@@ -47,7 +47,24 @@ class HarnessTests(unittest.TestCase):
             self.assertTrue(result.success)
             events = [json.loads(line)["event"] for line in trace.read_text(encoding="utf-8").splitlines()]
             self.assertIn("tool_completed", events)
+            self.assertIn("evidence_selected", events)
             self.assertIn("run_completed", events)
+
+    def test_weak_secondary_evidence_is_filtered(self):
+        cases = [
+            ("生产发布允许在哪些时间窗口进行？", "release_policy.md#p2"),
+            ("公共模型网关每分钟允许多少请求？", "api_limits.md#p2"),
+        ]
+        for question, expected_citation in cases:
+            with self.subTest(question=question):
+                result = self.harness.run(question)
+                self.assertTrue(result.success)
+                self.assertEqual(result.citations, [expected_citation])
+
+    def test_strong_multi_source_evidence_is_kept(self):
+        result = self.harness.run("Agent 是否可以直接修改生产数据库？")
+        sources = {citation.split("#", 1)[0] for citation in result.citations}
+        self.assertEqual(sources, {"incident_response.md", "security_policy.md"})
 
     def test_checkpoint_resume(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -62,9 +79,9 @@ class HarnessTests(unittest.TestCase):
             output = Path(tmp) / "report.json"
             report = evaluate_cases(ROOT / "eval_cases.json", ROOT / "sample_docs", output)
             self.assertEqual(report["summary"]["case_count"], 10)
+            self.assertEqual(report["summary"]["citation_accuracy"], 1.0)
             self.assertTrue(output.exists())
 
 
 if __name__ == "__main__":
     unittest.main()
-

@@ -91,7 +91,7 @@ python --version
 
 如果 Windows 找不到 `python`，可将下面命令中的 `python` 换为 `py -3`。
 
-### 2. 运行 8 项自动测试
+### 2. 运行 10 项自动测试
 
 ```bash
 python -m unittest discover -s tests -v
@@ -100,7 +100,7 @@ python -m unittest discover -s tests -v
 预期结尾：
 
 ```text
-Ran 8 tests
+Ran 10 tests
 OK
 ```
 
@@ -120,10 +120,10 @@ python -m rag_harness.cli eval --cases eval_cases.json --docs sample_docs --outp
   "success_rate": 1.0,
   "retrieval_hit_rate": 1.0,
   "keyword_pass_rate": 1.0,
-  "citation_accuracy": 0.9,
-  "p50_latency_ms": 2.032,
-  "approx_input_tokens": 1019,
-  "approx_output_tokens": 873,
+  "citation_accuracy": 1.0,
+  "p50_latency_ms": 2.257,
+  "approx_input_tokens": 640,
+  "approx_output_tokens": 494,
   "estimated_cost_usd": 0.0
 }
 ```
@@ -192,7 +192,7 @@ python -m rag_harness.cli ask "火星基地的午餐菜单是什么？" --docs s
 | `p50_latency_ms` | 所有用例延迟的中位数 | 本地流程的典型耗时 |
 | Token / 费用 | 当前为近似计数和可配置价格公式 | 接入真实模型后比较成本 |
 
-当前检索命中率为 100%，但引用准确率为 90%。原因是 `case_03` 和 `case_07` 在引用正确文档的同时，各带入了一个额外来源。这是一个被报告真实暴露出来的问题，后续可通过重排、相关性阈值和困难负样本改进。
+项目最初的检索命中率为 100%，引用准确率为 90%。`case_03` 和 `case_07` 虽然找到正确文档，却各带入了一个仅有通用词重合的额外来源。修复后，第二条证据只有在得分达到第一条的 50% 时才会进入回答；真正需要跨文档回答的 `case_05` 仍保留两个来源。当前引用准确率为 100%，完整诊断、方案选择、轨迹和回归结果见 [引用准确率 90% → 100%：一次完整修复](docs/citation-accuracy-fix.md)。
 
 ## 安全与可靠性设计
 
@@ -213,7 +213,7 @@ rag_harness/
   trace.py          JSONL事件轨迹
   cli.py            ask/eval命令行入口
 sample_docs/         NovaLab虚构知识库
-tests/               8项自动测试
+tests/               10项自动测试
 eval_cases.json      固定问题、预期来源和关键词
 artifacts/
   eval_report.json   已提交的参考评测报告

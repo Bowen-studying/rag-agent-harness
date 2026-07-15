@@ -42,6 +42,8 @@ def approx_tokens(text: str) -> int:
 
 class AgentHarness:
     allowed_tools = {"search_docs"}
+    max_answer_chunks = 2
+    min_secondary_score_ratio = 0.5
 
     def __init__(self, index: DocumentIndex, input_cost_per_million: float = 0.0, output_cost_per_million: float = 0.0):
         self.index = index
@@ -52,6 +54,24 @@ class AgentHarness:
         if name not in self.allowed_tools:
             raise HarnessError(f"tool is not allowed: {name}", "tool_boundary")
         return self.index.search(query, top_k=top_k)
+
+    def select_evidence(self, results: list[SearchResult]) -> tuple[list[SearchResult], float]:
+        """Keep the best evidence and only similarly strong secondary chunks.
+
+        Search results are sorted by score. A weak second result often shares a
+        generic token such as "生产" or "分钟" without supporting the answer.
+        Requiring at least half of the top score keeps the genuine multi-source
+        case while preventing those weak matches from becoming citations.
+        """
+        if not results:
+            return [], 0.0
+        threshold = results[0].score * self.min_secondary_score_ratio
+        selected = [results[0]]
+        for item in results[1:]:
+            if len(selected) >= self.max_answer_chunks or item.score < threshold:
+                break
+            selected.append(item)
+        return selected, round(threshold, 6)
 
     def run(
         self,
@@ -99,7 +119,15 @@ class AgentHarness:
             if (time.perf_counter() - started) * 1000 > timeout_ms:
                 raise HarnessError("run exceeded timeout after tool call", "timeout")
 
-            selected = results[:2]
+            selected, evidence_threshold = self.select_evidence(results)
+            trace.write(
+                "evidence_selected",
+                run_id=run_id,
+                top_score=results[0].score,
+                min_secondary_score=evidence_threshold,
+                selected=[{"chunk_id": item.chunk_id, "score": item.score} for item in selected],
+                rejected=[{"chunk_id": item.chunk_id, "score": item.score} for item in results if item not in selected],
+            )
             answer_parts = []
             for item in selected:
                 clean = re.sub(r"^#+\s*", "", item.text).strip()
@@ -134,4 +162,3 @@ class AgentHarness:
             latency = round((time.perf_counter() - started) * 1000, 3)
             trace.write("run_failed", run_id=run_id, failure_type=exc.failure_type, message=str(exc), latency_ms=latency)
             return AgentResult(run_id, question, "", [], [], False, exc.failure_type, latency, approx_tokens(question), 0, 0.0)
-

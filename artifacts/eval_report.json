@@ -4,10 +4,10 @@
     "success_rate": 1.0,
     "retrieval_hit_rate": 1.0,
     "keyword_pass_rate": 1.0,
-    "citation_accuracy": 0.9,
-    "p50_latency_ms": 2.032,
-    "approx_input_tokens": 1019,
-    "approx_output_tokens": 873,
+    "citation_accuracy": 1.0,
+    "p50_latency_ms": 2.257,
+    "approx_input_tokens": 640,
+    "approx_output_tokens": 494,
     "estimated_cost_usd": 0.0
   },
   "cases": [
@@ -19,12 +19,11 @@
       "citation_accuracy": 1.0,
       "keyword_score": 1.0,
       "citations": [
-        "incident_response.md#p2",
-        "incident_response.md#p1"
+        "incident_response.md#p2"
       ],
-      "latency_ms": 4.404,
-      "approx_input_tokens": 69,
-      "approx_output_tokens": 55,
+      "latency_ms": 3.804,
+      "approx_input_tokens": 61,
+      "approx_output_tokens": 47,
       "estimated_cost_usd": 0.0,
       "failure_reason": null
     },
@@ -36,12 +35,11 @@
       "citation_accuracy": 1.0,
       "keyword_score": 1.0,
       "citations": [
-        "incident_response.md#p4",
-        "incident_response.md#p2"
+        "incident_response.md#p4"
       ],
-      "latency_ms": 1.854,
-      "approx_input_tokens": 96,
-      "approx_output_tokens": 82,
+      "latency_ms": 2.186,
+      "approx_input_tokens": 48,
+      "approx_output_tokens": 34,
       "estimated_cost_usd": 0.0,
       "failure_reason": null
     },
@@ -50,15 +48,14 @@
       "question": "生产发布允许在哪些时间窗口进行？",
       "success": true,
       "retrieval_hit": true,
-      "citation_accuracy": 0.5,
+      "citation_accuracy": 1.0,
       "keyword_score": 1.0,
       "citations": [
-        "release_policy.md#p2",
-        "security_policy.md#p2"
+        "release_policy.md#p2"
       ],
-      "latency_ms": 1.819,
-      "approx_input_tokens": 109,
-      "approx_output_tokens": 94,
+      "latency_ms": 2.535,
+      "approx_input_tokens": 55,
+      "approx_output_tokens": 40,
       "estimated_cost_usd": 0.0,
       "failure_reason": null
     },
@@ -70,12 +67,11 @@
       "citation_accuracy": 1.0,
       "keyword_score": 1.0,
       "citations": [
-        "release_policy.md#p3",
-        "release_policy.md#p2"
+        "release_policy.md#p3"
       ],
-      "latency_ms": 2.05,
-      "approx_input_tokens": 96,
-      "approx_output_tokens": 82,
+      "latency_ms": 2.436,
+      "approx_input_tokens": 56,
+      "approx_output_tokens": 42,
       "estimated_cost_usd": 0.0,
       "failure_reason": null
     },
@@ -90,7 +86,7 @@
         "incident_response.md#p3",
         "security_policy.md#p2"
       ],
-      "latency_ms": 2.277,
+      "latency_ms": 2.281,
       "approx_input_tokens": 121,
       "approx_output_tokens": 107,
       "estimated_cost_usd": 0.0,
@@ -104,12 +100,11 @@
       "citation_accuracy": 1.0,
       "keyword_score": 1.0,
       "citations": [
-        "security_policy.md#p3",
-        "security_policy.md#p2"
+        "security_policy.md#p3"
       ],
-      "latency_ms": 2.171,
-      "approx_input_tokens": 117,
-      "approx_output_tokens": 103,
+      "latency_ms": 2.226,
+      "approx_input_tokens": 62,
+      "approx_output_tokens": 48,
       "estimated_cost_usd": 0.0,
       "failure_reason": null
     },
@@ -118,15 +113,14 @@
       "question": "公共模型网关每分钟允许多少请求？",
       "success": true,
       "retrieval_hit": true,
-      "citation_accuracy": 0.5,
+      "citation_accuracy": 1.0,
       "keyword_score": 1.0,
       "citations": [
-        "api_limits.md#p2",
-        "incident_response.md#p2"
+        "api_limits.md#p2"
       ],
-      "latency_ms": 2.015,
-      "approx_input_tokens": 109,
-      "approx_output_tokens": 94,
+      "latency_ms": 2.233,
+      "approx_input_tokens": 62,
+      "approx_output_tokens": 47,
       "estimated_cost_usd": 0.0,
       "failure_reason": null
     },
@@ -138,12 +132,11 @@
       "citation_accuracy": 1.0,
       "keyword_score": 1.0,
       "citations": [
-        "api_limits.md#p3",
-        "api_limits.md#p4"
+        "api_limits.md#p3"
       ],
-      "latency_ms": 1.85,
-      "approx_input_tokens": 100,
-      "approx_output_tokens": 82,
+      "latency_ms": 2.309,
+      "approx_input_tokens": 65,
+      "approx_output_tokens": 47,
       "estimated_cost_usd": 0.0,
       "failure_reason": null
     },
@@ -155,12 +148,11 @@
       "citation_accuracy": 1.0,
       "keyword_score": 1.0,
       "citations": [
-        "knowledge_workflow.md#p3",
-        "knowledge_workflow.md#p2"
+        "knowledge_workflow.md#p3"
       ],
-      "latency_ms": 1.936,
-      "approx_input_tokens": 104,
-      "approx_output_tokens": 90,
+      "latency_ms": 2.042,
+      "approx_input_tokens": 58,
+      "approx_output_tokens": 44,
       "estimated_cost_usd": 0.0,
       "failure_reason": null
     },
@@ -172,12 +164,11 @@
       "citation_accuracy": 1.0,
       "keyword_score": 1.0,
       "citations": [
-        "knowledge_workflow.md#p4",
-        "knowledge_workflow.md#p2"
+        "knowledge_workflow.md#p4"
       ],
-      "latency_ms": 2.277,
-      "approx_input_tokens": 98,
-      "approx_output_tokens": 84,
+      "latency_ms": 2.059,
+      "approx_input_tokens": 52,
+      "approx_output_tokens": 38,
       "estimated_cost_usd": 0.0,
       "failure_reason": null
     }
