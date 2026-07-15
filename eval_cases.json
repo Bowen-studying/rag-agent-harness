@@ -1,0 +1,13 @@
+[
+  {"id":"case_01","question":"P0 生产事故要求多久首次响应？","expected_sources":["incident_response.md"],"keywords":["5 分钟","首次响应"]},
+  {"id":"case_02","question":"事故复盘需要在什么时间内完成？","expected_sources":["incident_response.md"],"keywords":["48 小时","复盘"]},
+  {"id":"case_03","question":"生产发布允许在哪些时间窗口进行？","expected_sources":["release_policy.md"],"keywords":["周二","周四","14:00-17:00"]},
+  {"id":"case_04","question":"发布前哪些测试或演练是必需的？","expected_sources":["release_policy.md"],"keywords":["单元测试","集成测试","回滚演练"]},
+  {"id":"case_05","question":"Agent 是否可以直接修改生产数据库？","expected_sources":["incident_response.md","security_policy.md"],"keywords":["人工确认","禁止"]},
+  {"id":"case_06","question":"工具调用日志必须记录哪些字段？","expected_sources":["security_policy.md"],"keywords":["工具名","参数摘要","延迟","失败原因"]},
+  {"id":"case_07","question":"公共模型网关每分钟允许多少请求？","expected_sources":["api_limits.md"],"keywords":["60","每分钟"]},
+  {"id":"case_08","question":"模型评测报告要记录哪些成本与性能信息？","expected_sources":["api_limits.md"],"keywords":["输入 Token","输出 Token","请求延迟","估算费用"]},
+  {"id":"case_09","question":"检索不到证据时系统应该怎么做？","expected_sources":["knowledge_workflow.md"],"keywords":["no_result","不应"]},
+  {"id":"case_10","question":"知识库内容变化后如何更新索引？","expected_sources":["knowledge_workflow.md"],"keywords":["受影响文档","前一版本","回滚"]}
+]
+

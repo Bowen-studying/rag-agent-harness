@@ -1,0 +1,185 @@
+{
+  "summary": {
+    "case_count": 10,
+    "success_rate": 1.0,
+    "retrieval_hit_rate": 1.0,
+    "keyword_pass_rate": 1.0,
+    "citation_accuracy": 0.9,
+    "p50_latency_ms": 2.032,
+    "approx_input_tokens": 1019,
+    "approx_output_tokens": 873,
+    "estimated_cost_usd": 0.0
+  },
+  "cases": [
+    {
+      "id": "case_01",
+      "question": "P0 生产事故要求多久首次响应？",
+      "success": true,
+      "retrieval_hit": true,
+      "citation_accuracy": 1.0,
+      "keyword_score": 1.0,
+      "citations": [
+        "incident_response.md#p2",
+        "incident_response.md#p1"
+      ],
+      "latency_ms": 4.404,
+      "approx_input_tokens": 69,
+      "approx_output_tokens": 55,
+      "estimated_cost_usd": 0.0,
+      "failure_reason": null
+    },
+    {
+      "id": "case_02",
+      "question": "事故复盘需要在什么时间内完成？",
+      "success": true,
+      "retrieval_hit": true,
+      "citation_accuracy": 1.0,
+      "keyword_score": 1.0,
+      "citations": [
+        "incident_response.md#p4",
+        "incident_response.md#p2"
+      ],
+      "latency_ms": 1.854,
+      "approx_input_tokens": 96,
+      "approx_output_tokens": 82,
+      "estimated_cost_usd": 0.0,
+      "failure_reason": null
+    },
+    {
+      "id": "case_03",
+      "question": "生产发布允许在哪些时间窗口进行？",
+      "success": true,
+      "retrieval_hit": true,
+      "citation_accuracy": 0.5,
+      "keyword_score": 1.0,
+      "citations": [
+        "release_policy.md#p2",
+        "security_policy.md#p2"
+      ],
+      "latency_ms": 1.819,
+      "approx_input_tokens": 109,
+      "approx_output_tokens": 94,
+      "estimated_cost_usd": 0.0,
+      "failure_reason": null
+    },
+    {
+      "id": "case_04",
+      "question": "发布前哪些测试或演练是必需的？",
+      "success": true,
+      "retrieval_hit": true,
+      "citation_accuracy": 1.0,
+      "keyword_score": 1.0,
+      "citations": [
+        "release_policy.md#p3",
+        "release_policy.md#p2"
+      ],
+      "latency_ms": 2.05,
+      "approx_input_tokens": 96,
+      "approx_output_tokens": 82,
+      "estimated_cost_usd": 0.0,
+      "failure_reason": null
+    },
+    {
+      "id": "case_05",
+      "question": "Agent 是否可以直接修改生产数据库？",
+      "success": true,
+      "retrieval_hit": true,
+      "citation_accuracy": 1.0,
+      "keyword_score": 1.0,
+      "citations": [
+        "incident_response.md#p3",
+        "security_policy.md#p2"
+      ],
+      "latency_ms": 2.277,
+      "approx_input_tokens": 121,
+      "approx_output_tokens": 107,
+      "estimated_cost_usd": 0.0,
+      "failure_reason": null
+    },
+    {
+      "id": "case_06",
+      "question": "工具调用日志必须记录哪些字段？",
+      "success": true,
+      "retrieval_hit": true,
+      "citation_accuracy": 1.0,
+      "keyword_score": 1.0,
+      "citations": [
+        "security_policy.md#p3",
+        "security_policy.md#p2"
+      ],
+      "latency_ms": 2.171,
+      "approx_input_tokens": 117,
+      "approx_output_tokens": 103,
+      "estimated_cost_usd": 0.0,
+      "failure_reason": null
+    },
+    {
+      "id": "case_07",
+      "question": "公共模型网关每分钟允许多少请求？",
+      "success": true,
+      "retrieval_hit": true,
+      "citation_accuracy": 0.5,
+      "keyword_score": 1.0,
+      "citations": [
+        "api_limits.md#p2",
+        "incident_response.md#p2"
+      ],
+      "latency_ms": 2.015,
+      "approx_input_tokens": 109,
+      "approx_output_tokens": 94,
+      "estimated_cost_usd": 0.0,
+      "failure_reason": null
+    },
+    {
+      "id": "case_08",
+      "question": "模型评测报告要记录哪些成本与性能信息？",
+      "success": true,
+      "retrieval_hit": true,
+      "citation_accuracy": 1.0,
+      "keyword_score": 1.0,
+      "citations": [
+        "api_limits.md#p3",
+        "api_limits.md#p4"
+      ],
+      "latency_ms": 1.85,
+      "approx_input_tokens": 100,
+      "approx_output_tokens": 82,
+      "estimated_cost_usd": 0.0,
+      "failure_reason": null
+    },
+    {
+      "id": "case_09",
+      "question": "检索不到证据时系统应该怎么做？",
+      "success": true,
+      "retrieval_hit": true,
+      "citation_accuracy": 1.0,
+      "keyword_score": 1.0,
+      "citations": [
+        "knowledge_workflow.md#p3",
+        "knowledge_workflow.md#p2"
+      ],
+      "latency_ms": 1.936,
+      "approx_input_tokens": 104,
+      "approx_output_tokens": 90,
+      "estimated_cost_usd": 0.0,
+      "failure_reason": null
+    },
+    {
+      "id": "case_10",
+      "question": "知识库内容变化后如何更新索引？",
+      "success": true,
+      "retrieval_hit": true,
+      "citation_accuracy": 1.0,
+      "keyword_score": 1.0,
+      "citations": [
+        "knowledge_workflow.md#p4",
+        "knowledge_workflow.md#p2"
+      ],
+      "latency_ms": 2.277,
+      "approx_input_tokens": 98,
+      "approx_output_tokens": 84,
+      "estimated_cost_usd": 0.0,
+      "failure_reason": null
+    }
+  ]
+}

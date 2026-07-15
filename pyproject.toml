@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rag-agent-harness"
+version = "0.1.0"
+description = "A provider-neutral RAG agent harness with deterministic evaluation and JSONL traces."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Bowen Zou"}]
+dependencies = []
+
+[project.scripts]
+rag-ask = "rag_harness.cli:ask_main"
+rag-eval = "rag_harness.cli:eval_main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["rag_harness*"]
+
