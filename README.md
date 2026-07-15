@@ -1,245 +1,279 @@
 # RAG Agent Harness
 
-一个可以在本地完整复现的 **RAG Agent 测试台**：它让 Agent 检索知识库、生成带来源的回答，并自动检查 Agent 是否找对证据、引用是否准确、失败发生在哪一步。
+[![CI](https://github.com/Bowen-studying/rag-agent-harness/actions/workflows/ci.yml/badge.svg)](https://github.com/Bowen-studying/rag-agent-harness/actions/workflows/ci.yml)
 
-> 这不是一个追求“回答看起来很聪明”的聊天 Demo。它关注的是：Agent 能不能被测试、被诊断、被安全地迭代。
+一个零外部依赖、可以在本地完整复现的 **RAG Agent 测试台**。它不只回答问题，还检查 Agent 是否找全证据、是否夹带错误引用、是否覆盖问题的每个要点，以及失败究竟发生在哪一步。
 
-项目仅使用 Python 标准库，不需要 API Key、外部大模型、向量数据库或网络服务。Python 要求为 3.10 及以上。
+> 目标不是再做一个“看起来能回答”的 Demo，而是让一次 Agent 修改能够被测试、比较、诊断和安全地回归。
 
-## 它解决什么问题
+项目使用 Python 标准库，Python 3.10+；不需要 API Key、外部大模型、向量数据库或网络服务。
 
-普通 RAG Demo 往往只能展示一次成功回答，但在工程中还需要回答下面的问题：
+## 当前能验证什么
 
-1. Agent 找到的是正确证据，还是碰巧生成了正确文字？
-2. 回答中的引用真的支持结论吗？
-3. 失败发生在输入、工具、检索、超时还是回答阶段？
-4. 修改检索逻辑或 Prompt 后，同一批问题是否真的变好？
-5. Agent 是否会调用未授权工具，或者在没有证据时编造答案？
-
-这个 Harness 为这些问题提供固定用例、自动指标、JSONL 调用轨迹、失败分类和自动测试。
+- 5 份 NovaLab 虚构制度文档，按段落建立可引用索引；
+- 15 条固定评测：单证据、多段证据、跨文档、困难负样本和预期失败；
+- 引用 Precision / Recall / F1、精确引用匹配率和问题要点覆盖率；
+- BM25 检索、复合问题分解、动态证据数量和 Token 预算；
+- `no_result`、超时、参数错误、工具越权和 Checkpoint 续跑；
+- JSONL 轨迹记录候选证据、选择原因、拒绝原因和失败类型；
+- 16 项自动测试与 GitHub Actions 持续验证。
 
 ## 使用了什么例子
 
-仓库内置了一个完全虚构的公司 **NovaLab**，并提供 5 份脱敏知识库文档：
+仓库内置完全虚构的公司 **NovaLab**，示例知识库位于 `sample_docs/`：
 
 | 文档 | 内容示例 |
 |---|---|
-| `incident_response.md` | P0 事故响应时间、复盘期限、生产写入限制 |
-| `release_policy.md` | 发布时间窗口、必需测试和回滚演练 |
-| `security_policy.md` | 工具白名单、人工确认、日志字段和密钥保护 |
-| `api_limits.md` | 模型网关限流、Token、延迟和费用记录 |
-| `knowledge_workflow.md` | 文档入库、引用、无结果处理和索引更新 |
+| `incident_response.md` | P0/P1响应、事故频道、生产写入和48小时复盘 |
+| `release_policy.md` | 发布时间窗口、必需测试、紧急审批和90天日志 |
+| `security_policy.md` | 工具白名单、人工确认、日志字段和越权处理 |
+| `api_limits.md` | 网关限流、重试、Token、延迟和费用 |
+| `knowledge_workflow.md` | 文档入库、引用、无结果、增量索引和回滚 |
 
-`eval_cases.json` 中有 10 条固定问题。每条问题在运行前就定义了：
-
-- `expected_sources`：正确答案应该来自哪些文档；
-- `keywords`：回答中应该出现哪些关键信息。
-
-例如：
+单证据问题示例：
 
 ```json
 {
-  "id": "case_01",
   "question": "P0 生产事故要求多久首次响应？",
-  "expected_sources": ["incident_response.md"],
-  "keywords": ["5 分钟", "首次响应"]
+  "expected_citations": ["incident_response.md#p2"],
+  "aspects": [
+    {"name": "首次响应", "keywords": ["5 分钟", "首次响应"]}
+  ]
 }
 ```
 
-知识库原文明确写着 P0 事故必须在 5 分钟内首次响应。Harness 应该检索到对应段落，返回回答，并附上类似 `incident_response.md#p2` 的引用。
+多证据问题示例：
 
-## 一次请求具体发生了什么
+```json
+{
+  "question": "生产发布的时间窗口、发布前测试和日志保留期限分别是什么？",
+  "expected_citations": [
+    "release_policy.md#p2",
+    "release_policy.md#p3",
+    "release_policy.md#p4"
+  ]
+}
+```
+
+这条用例要求系统返回3段证据，用来防止“少引用就能获得虚假高准确率”。完整数据见 [`eval_cases.json`](eval_cases.json)。
+
+## 一次请求怎样运行
 
 ```mermaid
 flowchart LR
-    Q[用户问题] --> V[输入与参数校验]
-    V --> B[工具白名单检查]
-    B --> R[检索知识库]
-    R --> K[(NovaLab 示例文档)]
-    R --> A[抽取式回答器]
-    A --> C[回答与段落引用]
-    C --> E[固定用例评分]
-    E --> M[命中率 / 关键词 / 引用准确率]
-    V --> T[JSONL 调用轨迹]
-    B --> T
+    Q[问题] --> V[输入与工具校验]
+    V --> R[BM25 全局检索]
+    Q --> D[显式要点分解]
+    D --> AR[逐要点补检索]
+    R --> S[动态证据选择]
+    AR --> S
+    S --> B[Token 预算]
+    B --> A[抽取式回答与段落引用]
+    A --> E[Precision / Recall / F1 / 要点覆盖]
+    V --> T[JSONL 轨迹]
     R --> T
+    S --> T
     A --> T
-    M --> P[评测报告]
 ```
 
-以“P0 生产事故要求多久首次响应？”为例：
+证据选择没有固定条数：
 
-1. 校验问题不为空，并检查 `top_k` 是否在 1–5 之间。
-2. Harness 只允许调用 `search_docs`，其他工具名称直接拒绝。
-3. 检索器读取 Markdown/TXT，把文档按段落切分。
-4. 中文使用相邻双字词、英文使用单词进行确定性打分。
-5. 取得分最高的证据段落，抽取原文形成回答。
-6. 返回回答、段落引用、证据内容、延迟和近似 Token。
-7. 用预期来源和关键词自动评分，同时写入 JSONL 调用轨迹。
+1. 用 BM25 取得全局候选，保留相对第一名足够强的段落；
+2. 对明确包含多个部分的问题，提取子问题并为每个要点补充最佳证据；
+3. 跳过只有标题、没有事实内容的段落；
+4. 去重后按总证据 Token 预算截断，默认预算为800；
+5. 在轨迹中记录每条证据被选中或拒绝的原因。
 
-这里故意使用确定性本地检索和抽取式回答器：同一份代码和数据可以重复得到相同语义结果，适合作为接入真实 LLM 前的可复现基线。
+本地抽取式回答器是可重复基线，不代表真实 LLM 的语言效果。后续替换回答器时，评测集和报告结构可以继续使用。
 
 ## 五分钟验证
 
-### 1. 克隆仓库
+### 1. 克隆并检查环境
 
 ```bash
 git clone https://github.com/Bowen-studying/rag-agent-harness.git
 cd rag-agent-harness
-python --version
+python3 --version
 ```
 
-如果 Windows 找不到 `python`，可将下面命令中的 `python` 换为 `py -3`。
-
-### 2. 运行 10 项自动测试
+### 2. 运行16项自动测试
 
 ```bash
-python -m unittest discover -s tests -v
+python3 -m unittest discover -s tests -v
 ```
 
 预期结尾：
 
 ```text
-Ran 10 tests
+Ran 16 tests
 OK
 ```
 
-测试覆盖：正确检索、明确无结果、非法参数、越权工具、超时、完整轨迹、Checkpoint 续跑和 10 条评测用例。
-
-### 3. 运行 10 条固定评测
+### 3. 运行15条固定评测
 
 ```bash
-python -m rag_harness.cli eval --cases eval_cases.json --docs sample_docs --output artifacts/eval_report.local.json --trace-dir artifacts/traces
+python3 -m rag_harness.cli eval \
+  --cases eval_cases.json \
+  --docs sample_docs \
+  --output artifacts/eval_report.local.json \
+  --trace-dir artifacts/traces \
+  --fail-under 1.0
 ```
 
 当前参考结果：
 
 ```json
 {
-  "case_count": 10,
-  "success_rate": 1.0,
-  "retrieval_hit_rate": 1.0,
-  "keyword_pass_rate": 1.0,
-  "citation_accuracy": 1.0,
-  "p50_latency_ms": 2.257,
-  "approx_input_tokens": 640,
-  "approx_output_tokens": 494,
-  "estimated_cost_usd": 0.0
+  "case_count": 15,
+  "answer_case_count": 14,
+  "expected_failure_case_count": 1,
+  "task_pass_rate": 1.0,
+  "runtime_success_rate": 0.9333,
+  "expected_failure_pass_rate": 1.0,
+  "citation_precision": 1.0,
+  "citation_recall": 1.0,
+  "citation_f1": 1.0,
+  "exact_citation_match_rate": 1.0,
+  "aspect_coverage": 1.0
 }
 ```
 
-`p50_latency_ms` 会随电脑性能变化，不要求与参考值完全相同。
+`runtime_success_rate` 为93.33%是预期结果：15条用例中有1条专门要求返回 `no_result`。`task_pass_rate` 才表示系统是否做出了每条用例期待的行为。
 
-### 4. 单独询问一个问题
+`--fail-under 1.0` 会在任务通过率低于100%时返回非零退出码，可直接用于 CI。延迟会受电脑性能影响，不要求与仓库报告完全一致。
 
-```bash
-python -m rag_harness.cli ask "P0 生产事故要求多久首次响应？" --docs sample_docs --trace artifacts/traces/demo.jsonl
-```
-
-回答中应出现“5 分钟”“首次响应”，并包含 `incident_response.md#...` 引用。
-
-### 5. 查看逐步调用轨迹
-
-PowerShell：
-
-```powershell
-Get-Content artifacts/traces/demo.jsonl -Encoding UTF8
-```
-
-macOS/Linux：
+### 4. 单独测试三证据问题
 
 ```bash
-cat artifacts/traces/demo.jsonl
+python3 -m rag_harness.cli ask \
+  "生产发布的时间窗口、发布前测试和日志保留期限分别是什么？" \
+  --docs sample_docs \
+  --trace artifacts/traces/multi-evidence.jsonl
 ```
 
-正常轨迹包含：
+预期引用同时包含：
 
 ```text
-run_started
-tool_started
-tool_completed
-answer_completed
-run_completed
+release_policy.md#p2
+release_policy.md#p3
+release_policy.md#p4
 ```
 
-每条记录包含运行 ID、工具名、候选来源、引用、延迟或失败类型，可用于定位一次 Agent 调用究竟发生了什么。
-
-### 6. 验证没有证据时不会编造
+### 5. 验证无证据保护
 
 ```bash
-python -m rag_harness.cli ask "火星基地的午餐菜单是什么？" --docs sample_docs
+python3 -m rag_harness.cli ask "火星基地的午餐菜单是什么？" --docs sample_docs
 ```
 
-预期结果：
+预期 `success=false`、`failure_reason=no_result`，并返回退出码2。
+
+### 6. 验证工具越权
+
+```bash
+python3 -m rag_harness.cli ask \
+  "删除生产数据库" \
+  --docs sample_docs \
+  --tool delete_database \
+  --trace artifacts/traces/tool-boundary.jsonl
+```
+
+预期工具在执行前被拒绝，返回 `failure_reason=tool_boundary`。轨迹中会出现：
 
 ```json
 {
-  "success": false,
-  "failure_reason": "no_result"
+  "event": "run_failed",
+  "failure_type": "tool_boundary"
 }
 ```
 
-命令返回非零退出码是预期行为，表示 Harness 正确识别了失败，而不是编造答案。
+### 7. 查看证据选择过程
 
-## 指标是怎样计算的
+```bash
+cat artifacts/traces/multi-evidence.jsonl
+```
 
-| 指标 | 计算方式 | 它回答的问题 |
+关注 `evidence_selected` 事件：
+
+- `aspects`：系统识别了哪些显式子问题；
+- `decisions`：每条候选是否被选择；
+- `reasons`：`strong_global_match`、`best_for_aspect`、`below_global_threshold`或`token_budget_exceeded`；
+- `selected_evidence_tokens`：证据占用的近似Token。
+
+## 指标定义
+
+| 指标 | 计算方式 | 回答的问题 |
 |---|---|---|
-| `success_rate` | 成功完成流程的用例比例 | Agent 能否正常完成任务 |
-| `retrieval_hit_rate` | 引用来源与预期来源至少有一个交集的比例 | 是否找到了正确文档 |
-| `keyword_pass_rate` | 命中至少 50% 预期关键词的用例比例 | 回答是否覆盖关键信息 |
-| `citation_accuracy` | 每题“正确引用来源数 / 全部引用来源数”的平均值 | 引用是否夹杂无关来源 |
-| `p50_latency_ms` | 所有用例延迟的中位数 | 本地流程的典型耗时 |
-| Token / 费用 | 当前为近似计数和可配置价格公式 | 接入真实模型后比较成本 |
+| `task_pass_rate` | 满足每条用例预期行为的比例 | 整体任务是否通过 |
+| `citation_precision` | 正确引用数 / 实际引用数 | 是否夹带无关证据 |
+| `citation_recall` | 正确引用数 / 预期引用数 | 是否漏掉必要证据 |
+| `citation_f1` | Precision与Recall调和平均 | 精确与完整是否平衡 |
+| `exact_citation_match_rate` | 引用集合与标准集合完全相同的比例 | 是否既不多也不少 |
+| `aspect_coverage` | 已完整回答的要点数 / 全部要点数 | 复合问题是否漏答 |
+| `expected_failure_pass_rate` | 正确返回预期失败类型的比例 | 无结果等失败是否处理正确 |
+| `runtime_success_rate` | 流程返回 `success=true` 的比例 | 运行层面完成了多少次 |
 
-项目最初的检索命中率为 100%，引用准确率为 90%。`case_03` 和 `case_07` 虽然找到正确文档，却各带入了一个仅有通用词重合的额外来源。修复后，第二条证据只有在得分达到第一条的 50% 时才会进入回答；真正需要跨文档回答的 `case_05` 仍保留两个来源。当前引用准确率为 100%，完整诊断、方案选择、轨迹和回归结果见 [引用准确率 90% → 100%：一次完整修复](docs/citation-accuracy-fix.md)。
+评测报告同时保留每条用例的缺失引用、额外引用、未覆盖要点、失败类型、延迟和近似Token，避免只看汇总分数。
 
-## 安全与可靠性设计
+## CLI参数
 
-- **工具白名单**：只允许 `search_docs`；例如 `delete_database` 会被标记为 `tool_boundary`。
-- **参数约束**：问题不能为空，`top_k` 只能在 1–5 之间。
-- **无结果保护**：没有相关证据时返回 `no_result`，不让回答器凭空生成来源。
-- **超时分类**：工具调用前后都检查超时，并写入 `run_failed`。
-- **Checkpoint 续跑**：用问题和参数的哈希定位已有结果，支持中断后复用。
-- **轨迹脱敏原则**：Checkpoint 和日志不应保存 API Key、访问令牌或隐私原文。
+| 参数 | 默认值 | 作用 |
+|---|---:|---|
+| `--top-k` | 5 | 全局检索候选数，范围1–10 |
+| `--min-score-ratio` | 0.45 | 全局候选相对第一名的最低得分比例 |
+| `--max-evidence-tokens` | 800 | 证据总预算，不限制固定条数 |
+| `--fail-under` | 1.0 | 评测任务通过率下限 |
+| `--tool` | `search_docs` | `ask`命令请求的工具，用于验证工具边界 |
 
 ## 项目结构
 
 ```text
 rag_harness/
-  agent.py          Agent流程、工具边界、超时和Checkpoint
-  retrieval.py      文档分段、索引和确定性检索
-  evaluation.py     10条用例执行与指标计算
+  agent.py          Agent流程、动态证据、工具边界、超时和Checkpoint
+  retrieval.py      中文/英文分词、BM25、复合问题分解
+  evaluation.py     评测Schema、Precision/Recall/F1与分类汇总
   trace.py          JSONL事件轨迹
-  cli.py            ask/eval命令行入口
+  cli.py            ask/eval命令行入口和CI阈值
 sample_docs/         NovaLab虚构知识库
-tests/               10项自动测试
-eval_cases.json      固定问题、预期来源和关键词
+tests/               16项自动测试
+eval_cases.json      15条问题、精确引用、要点和预期失败
 artifacts/
   eval_report.json   已提交的参考评测报告
+docs/
+  engineering-log.md        逐轮问题、证据、决策和结果
+  citation-accuracy-fix.md   第一轮引用精确率修复记录
+  adding-eval-cases.md       新增问题与解释报告的指南
+.github/workflows/ci.yml     Push/PR自动测试与评测
 ```
 
-## 怎样接入真实系统
+## 工程迭代记录
 
-当前版本是最小可复现基线，不是生产 RAG 服务。真实项目中可以逐层替换：
+- [完整工程日志：从可运行Demo到可回归基线](docs/engineering-log.md)
+- [第一轮：引用精确率90% → 100%](docs/citation-accuracy-fix.md)
+- [怎样新增自己的评测问题](docs/adding-eval-cases.md)
+
+日志保留了被放弃的方案、失败基线和后续纠错，不把中间阶段改写成“一开始就设计正确”。
+
+## 怎样接入真实系统
 
 | 当前实现 | 可替换为 |
 |---|---|
 | 本地 Markdown/TXT | Trove、企业知识库、对象存储 |
-| 确定性关键词检索 | Qdrant、Milvus、Elasticsearch、混合检索 |
-| 抽取式回答器 | OpenAI-compatible LLM 或私有模型 |
+| BM25 | Elasticsearch、Qdrant/Milvus混合检索、Cross-Encoder重排 |
+| 抽取式回答器 | OpenAI-compatible LLM或私有模型 |
 | 本地 JSONL | LangFuse、OpenTelemetry、集中日志平台 |
-| 固定关键词评分 | LLM Judge、人工盲评、领域评分器 |
+| 固定事实与要点评分 | 人工盲评、LLM Judge、领域评分器 |
 
-检索器、回答器和轨迹记录相互独立，因此替换实现后仍可复用同一批评测用例和报告结构。
+替换检索器或回答器后，应继续运行相同评测集，并新增真实领域的盲测用例。
 
-## 当前边界
+## 当前边界与数据提醒
 
-- 结果来自虚构 NovaLab 文档，不能代表真实企业知识库效果。
-- 当前没有调用外部 LLM，`estimated_cost_usd` 为 0。
-- 当前延迟主要是本地检索耗时，不能等同于真实模型接口延迟。
-- Token 是近似估算，不是某个模型官方 tokenizer 的精确结果。
-- 10 条用例用于展示评测闭环，生产环境需要更大规模的盲测集、困难负样本和人工复核。
+- 当前100%只代表这15条公开虚构用例，不代表生产系统表现；
+- 显式要点分解是轻量规则，不能替代真实语义规划或多跳检索；
+- BM25仍会受词语重合影响，生产系统应加入语义检索和重排；
+- Token为近似估算，不是特定模型官方Tokenizer的精确值；
+- 本地延迟不能代表外部模型或向量数据库延迟；
+- Trace和Checkpoint会保存问题、回答或证据内容。不要把生产密钥、隐私数据写入问题，也不要提交运行产物；
+- 工具白名单只解决工具名称级边界，生产系统还需要参数校验、身份鉴权、人工审批和沙箱。
 
 ## License
 

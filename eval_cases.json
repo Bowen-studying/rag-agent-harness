@@ -1,13 +1,152 @@
 [
-  {"id":"case_01","question":"P0 生产事故要求多久首次响应？","expected_sources":["incident_response.md"],"keywords":["5 分钟","首次响应"]},
-  {"id":"case_02","question":"事故复盘需要在什么时间内完成？","expected_sources":["incident_response.md"],"keywords":["48 小时","复盘"]},
-  {"id":"case_03","question":"生产发布允许在哪些时间窗口进行？","expected_sources":["release_policy.md"],"keywords":["周二","周四","14:00-17:00"]},
-  {"id":"case_04","question":"发布前哪些测试或演练是必需的？","expected_sources":["release_policy.md"],"keywords":["单元测试","集成测试","回滚演练"]},
-  {"id":"case_05","question":"Agent 是否可以直接修改生产数据库？","expected_sources":["incident_response.md","security_policy.md"],"keywords":["人工确认","禁止"]},
-  {"id":"case_06","question":"工具调用日志必须记录哪些字段？","expected_sources":["security_policy.md"],"keywords":["工具名","参数摘要","延迟","失败原因"]},
-  {"id":"case_07","question":"公共模型网关每分钟允许多少请求？","expected_sources":["api_limits.md"],"keywords":["60","每分钟"]},
-  {"id":"case_08","question":"模型评测报告要记录哪些成本与性能信息？","expected_sources":["api_limits.md"],"keywords":["输入 Token","输出 Token","请求延迟","估算费用"]},
-  {"id":"case_09","question":"检索不到证据时系统应该怎么做？","expected_sources":["knowledge_workflow.md"],"keywords":["no_result","不应"]},
-  {"id":"case_10","question":"知识库内容变化后如何更新索引？","expected_sources":["knowledge_workflow.md"],"keywords":["受影响文档","前一版本","回滚"]}
+  {
+    "id": "case_01",
+    "category": "single_evidence",
+    "question": "P0 生产事故要求多久首次响应？",
+    "expected_sources": ["incident_response.md"],
+    "expected_citations": ["incident_response.md#p2"],
+    "keywords": ["5 分钟", "首次响应"],
+    "aspects": [{"name": "首次响应", "keywords": ["5 分钟", "首次响应"]}]
+  },
+  {
+    "id": "case_02",
+    "category": "single_evidence",
+    "question": "事故复盘需要在什么时间内完成？",
+    "expected_sources": ["incident_response.md"],
+    "expected_citations": ["incident_response.md#p4"],
+    "keywords": ["48 小时", "复盘"],
+    "aspects": [{"name": "复盘期限", "keywords": ["48 小时", "复盘"]}]
+  },
+  {
+    "id": "case_03",
+    "category": "hard_negative",
+    "question": "生产发布允许在哪些时间窗口进行？",
+    "expected_sources": ["release_policy.md"],
+    "expected_citations": ["release_policy.md#p2"],
+    "keywords": ["周二", "周四", "14:00-17:00"],
+    "aspects": [{"name": "发布窗口", "keywords": ["周二", "周四", "14:00-17:00"]}]
+  },
+  {
+    "id": "case_04",
+    "category": "single_evidence",
+    "question": "发布前哪些测试或演练是必需的？",
+    "expected_sources": ["release_policy.md"],
+    "expected_citations": ["release_policy.md#p3"],
+    "keywords": ["单元测试", "集成测试", "回滚演练"],
+    "aspects": [{"name": "发布测试", "keywords": ["单元测试", "集成测试", "回滚演练"]}]
+  },
+  {
+    "id": "case_05",
+    "category": "multi_document",
+    "question": "Agent 是否可以直接修改生产数据库？",
+    "expected_sources": ["incident_response.md", "security_policy.md"],
+    "expected_citations": ["incident_response.md#p3", "security_policy.md#p2"],
+    "keywords": ["人工确认", "禁止"],
+    "aspects": [
+      {"name": "禁止直接写入", "keywords": ["禁止", "生产数据库"]},
+      {"name": "人工确认", "keywords": ["人工确认"]}
+    ]
+  },
+  {
+    "id": "case_06",
+    "category": "single_evidence",
+    "question": "工具调用日志必须记录哪些字段？",
+    "expected_sources": ["security_policy.md"],
+    "expected_citations": ["security_policy.md#p3"],
+    "keywords": ["工具名", "参数摘要", "延迟", "失败原因"],
+    "aspects": [{"name": "日志字段", "keywords": ["工具名", "参数摘要", "延迟", "失败原因"]}]
+  },
+  {
+    "id": "case_07",
+    "category": "hard_negative",
+    "question": "公共模型网关每分钟允许多少请求？",
+    "expected_sources": ["api_limits.md"],
+    "expected_citations": ["api_limits.md#p2"],
+    "keywords": ["60", "每分钟"],
+    "aspects": [{"name": "请求限制", "keywords": ["60", "每分钟"]}]
+  },
+  {
+    "id": "case_08",
+    "category": "single_evidence",
+    "question": "模型评测报告要记录哪些成本与性能信息？",
+    "expected_sources": ["api_limits.md"],
+    "expected_citations": ["api_limits.md#p3"],
+    "keywords": ["输入 Token", "输出 Token", "请求延迟", "估算费用"],
+    "aspects": [{"name": "成本与性能字段", "keywords": ["输入 Token", "输出 Token", "请求延迟", "估算费用"]}]
+  },
+  {
+    "id": "case_09",
+    "category": "single_evidence",
+    "question": "检索不到证据时系统应该怎么做？",
+    "expected_sources": ["knowledge_workflow.md"],
+    "expected_citations": ["knowledge_workflow.md#p3"],
+    "keywords": ["no_result", "不应"],
+    "aspects": [{"name": "无证据处理", "keywords": ["no_result", "不应"]}]
+  },
+  {
+    "id": "case_10",
+    "category": "single_evidence",
+    "question": "知识库内容变化后如何更新索引？",
+    "expected_sources": ["knowledge_workflow.md"],
+    "expected_citations": ["knowledge_workflow.md#p4"],
+    "keywords": ["受影响文档", "前一版本", "回滚"],
+    "aspects": [{"name": "增量更新与回滚", "keywords": ["受影响文档", "前一版本", "回滚"]}]
+  },
+  {
+    "id": "case_11",
+    "category": "multi_paragraph",
+    "question": "生产发布的时间窗口、发布前测试和日志保留期限分别是什么？",
+    "expected_sources": ["release_policy.md"],
+    "expected_citations": ["release_policy.md#p2", "release_policy.md#p3", "release_policy.md#p4"],
+    "keywords": ["周二", "周四", "单元测试", "集成测试", "回滚演练", "90 天"],
+    "aspects": [
+      {"name": "发布窗口", "keywords": ["周二", "周四", "14:00-17:00"]},
+      {"name": "发布测试", "keywords": ["单元测试", "集成测试", "回滚演练"]},
+      {"name": "日志期限", "keywords": ["90 天"]}
+    ]
+  },
+  {
+    "id": "case_12",
+    "category": "multi_document",
+    "question": "发生 P0 事故且需要紧急发布修复时，首次响应、双重批准和发布前测试分别是什么要求？",
+    "expected_sources": ["incident_response.md", "release_policy.md"],
+    "expected_citations": ["incident_response.md#p2", "release_policy.md#p2", "release_policy.md#p3"],
+    "keywords": ["5 分钟", "双重批准", "单元测试", "集成测试", "回滚演练"],
+    "aspects": [
+      {"name": "首次响应", "keywords": ["5 分钟", "首次响应"]},
+      {"name": "紧急发布审批", "keywords": ["双重批准"]},
+      {"name": "发布测试", "keywords": ["单元测试", "集成测试", "回滚演练"]}
+    ]
+  },
+  {
+    "id": "case_13",
+    "category": "hard_negative",
+    "question": "生产发布是否允许 Agent 在测试失败后自动绕过流水线？",
+    "expected_sources": ["release_policy.md"],
+    "expected_citations": ["release_policy.md#p3"],
+    "keywords": ["流水线必须停止", "不得由 Agent 自动绕过"],
+    "aspects": [{"name": "失败后的处理", "keywords": ["流水线必须停止", "不得由 Agent 自动绕过"]}]
+  },
+  {
+    "id": "case_14",
+    "category": "expected_failure",
+    "question": "火星基地的午餐菜单是什么？",
+    "expected_sources": [],
+    "expected_citations": [],
+    "keywords": [],
+    "aspects": [],
+    "expected_failure": "no_result"
+  },
+  {
+    "id": "case_15",
+    "category": "multi_paragraph",
+    "question": "工具调用发生越权时系统怎么处理，日志又必须记录哪些字段？",
+    "expected_sources": ["security_policy.md"],
+    "expected_citations": ["security_policy.md#p3", "security_policy.md#p4"],
+    "keywords": ["failure_type=tool_boundary", "工具名", "参数摘要", "延迟", "失败原因"],
+    "aspects": [
+      {"name": "越权处理", "keywords": ["failure_type=tool_boundary"]},
+      {"name": "日志字段", "keywords": ["工具名", "参数摘要", "延迟", "失败原因"]}
+    ]
+  }
 ]
-

@@ -2,6 +2,6 @@ __pycache__/
 *.pyc
 .pytest_cache/
 .venv/
-artifacts/traces/*.jsonl
+artifacts/traces*/
 artifacts/checkpoints/*.json
 artifacts/*.local.json

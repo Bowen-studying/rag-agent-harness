@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-evaluate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run automated tests
+        run: python3 -m unittest discover -s tests -v
+      - name: Run the fixed evaluation set
+        run: >-
+          python3 -m rag_harness.cli eval
+          --cases eval_cases.json
+          --docs sample_docs
+          --output /tmp/eval_report.json
+          --trace-dir /tmp/rag-harness-traces
+          --fail-under 1.0
+      - name: Upload evaluation report
+        uses: actions/upload-artifact@v4
+        with:
+          name: eval-report
+          path: /tmp/eval_report.json
