@@ -1,0 +1,1063 @@
+{
+  "schema_version": "3.0",
+  "index_manifest": {
+    "schema_version": "3.0",
+    "manifest_sha256": "6eb39ea209632139ecf280797a431dc17c4732535a8f5c00348b9f8e15d22c4c",
+    "document_count": 173,
+    "chunk_count": 10617,
+    "documents_by_source_type": {
+      "obsidian": 104,
+      "pdf": 69
+    },
+    "documents_by_extraction_status": {
+      "ok": 157,
+      "partial_text": 16
+    }
+  },
+  "config": {
+    "candidate_top_k": 20,
+    "max_candidates": 8,
+    "max_evidence_tokens": 3000,
+    "semantic_decisions_supplied": true
+  },
+  "summary": {
+    "case_count": 32,
+    "answerable_case_count": 26,
+    "hard_negative_case_count": 6,
+    "execution_success_rate": 1.0,
+    "retrieval_task_pass_rate": 0.9375,
+    "candidate_group_recall": 1.0,
+    "evidence_precision": 0.9231,
+    "evidence_group_recall": 0.9231,
+    "evidence_f1": 0.9231,
+    "aspect_evidence_coverage": 0.9231,
+    "hard_negative_accuracy": 1.0,
+    "semantic_decision_coverage": 1.0,
+    "citation_locator_valid_rate": 1.0,
+    "index_load_ms": 2313.973,
+    "p50_retrieval_ms": 109.564
+  },
+  "cases": [
+    {
+      "id": "real-marx-features",
+      "category": "root-book-marx",
+      "expected_status": "answerable",
+      "retrieval_status": "candidates_found",
+      "judged_status": "answerable",
+      "semantic_decision_present": true,
+      "semantic_decision_valid": true,
+      "execution_success": true,
+      "case_passed": true,
+      "boundary_correct": true,
+      "evidence_precision": 1.0,
+      "evidence_group_recall": 1.0,
+      "evidence_f1": 1.0,
+      "candidate_group_recall": 1.0,
+      "evidence_groups": [
+        {
+          "id": "four-features",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_02f4ef0a60f0#pdf-page=23&chunk=2"
+          ]
+        }
+      ],
+      "retrieval_ms": 93.351,
+      "total_case_ms": 93.423
+    },
+    {
+      "id": "real-marx-contradiction",
+      "category": "root-book-marx",
+      "expected_status": "answerable",
+      "retrieval_status": "candidates_found",
+      "judged_status": "answerable",
+      "semantic_decision_present": true,
+      "semantic_decision_valid": true,
+      "execution_success": true,
+      "case_passed": true,
+      "boundary_correct": true,
+      "evidence_precision": 1.0,
+      "evidence_group_recall": 1.0,
+      "evidence_f1": 1.0,
+      "candidate_group_recall": 1.0,
+      "evidence_groups": [
+        {
+          "id": "identity",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_02f4ef0a60f0#pdf-page=52&chunk=1"
+          ]
+        },
+        {
+          "id": "struggle",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_02f4ef0a60f0#pdf-page=52&chunk=1"
+          ]
+        },
+        {
+          "id": "relationship",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_02f4ef0a60f0#pdf-page=52&chunk=1"
+          ]
+        }
+      ],
+      "retrieval_ms": 155.195,
+      "total_case_ms": 155.269
+    },
+    {
+      "id": "real-marx-practice",
+      "category": "root-book-marx",
+      "expected_status": "answerable",
+      "retrieval_status": "candidates_found",
+      "judged_status": "answerable",
+      "semantic_decision_present": true,
+      "semantic_decision_valid": true,
+      "execution_success": true,
+      "case_passed": true,
+      "boundary_correct": true,
+      "evidence_precision": 1.0,
+      "evidence_group_recall": 1.0,
+      "evidence_f1": 1.0,
+      "candidate_group_recall": 1.0,
+      "evidence_groups": [
+        {
+          "id": "source",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_02f4ef0a60f0#pdf-page=87&chunk=1"
+          ]
+        },
+        {
+          "id": "motivation",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_02f4ef0a60f0#pdf-page=87&chunk=1"
+          ]
+        },
+        {
+          "id": "purpose",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_02f4ef0a60f0#pdf-page=88&chunk=1"
+          ]
+        },
+        {
+          "id": "test",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_02f4ef0a60f0#pdf-page=88&chunk=1"
+          ]
+        }
+      ],
+      "retrieval_ms": 197.683,
+      "total_case_ms": 197.747
+    },
+    {
+      "id": "real-marx-value-evaluation",
+      "category": "root-book-marx",
+      "expected_status": "answerable",
+      "retrieval_status": "candidates_found",
+      "judged_status": "answerable",
+      "semantic_decision_present": true,
+      "semantic_decision_valid": true,
+      "execution_success": true,
+      "case_passed": true,
+      "boundary_correct": true,
+      "evidence_precision": 1.0,
+      "evidence_group_recall": 1.0,
+      "evidence_f1": 1.0,
+      "candidate_group_recall": 1.0,
+      "evidence_groups": [
+        {
+          "id": "definition-and-features",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_02f4ef0a60f0#pdf-page=113&chunk=1"
+          ]
+        }
+      ],
+      "retrieval_ms": 81.16,
+      "total_case_ms": 81.222
+    },
+    {
+      "id": "real-principles-five-step",
+      "category": "root-book-principles",
+      "expected_status": "answerable",
+      "retrieval_status": "candidates_found",
+      "judged_status": "answerable",
+      "semantic_decision_present": true,
+      "semantic_decision_valid": true,
+      "execution_success": true,
+      "case_passed": true,
+      "boundary_correct": true,
+      "evidence_precision": 1.0,
+      "evidence_group_recall": 1.0,
+      "evidence_f1": 1.0,
+      "candidate_group_recall": 1.0,
+      "evidence_groups": [
+        {
+          "id": "goals",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_ba3e95d73199#pdf-page=160&chunk=1"
+          ]
+        },
+        {
+          "id": "diagnose",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_ba3e95d73199#pdf-page=160&chunk=1"
+          ]
+        },
+        {
+          "id": "design-and-do",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_ba3e95d73199#pdf-page=160&chunk=1"
+          ]
+        }
+      ],
+      "retrieval_ms": 127.627,
+      "total_case_ms": 127.714
+    },
+    {
+      "id": "real-principles-open-mindedness",
+      "category": "root-book-principles",
+      "expected_status": "answerable",
+      "retrieval_status": "candidates_found",
+      "judged_status": "answerable",
+      "semantic_decision_present": true,
+      "semantic_decision_valid": true,
+      "execution_success": true,
+      "case_passed": true,
+      "boundary_correct": true,
+      "evidence_precision": 1.0,
+      "evidence_group_recall": 1.0,
+      "evidence_f1": 1.0,
+      "candidate_group_recall": 1.0,
+      "evidence_groups": [
+        {
+          "id": "requirements",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_ba3e95d73199#pdf-page=175&chunk=1"
+          ]
+        }
+      ],
+      "retrieval_ms": 92.131,
+      "total_case_ms": 92.216
+    },
+    {
+      "id": "real-principles-decision",
+      "category": "root-book-principles",
+      "expected_status": "answerable",
+      "retrieval_status": "candidates_found",
+      "judged_status": "insufficient_evidence",
+      "semantic_decision_present": true,
+      "semantic_decision_valid": true,
+      "execution_success": true,
+      "case_passed": false,
+      "boundary_correct": false,
+      "evidence_precision": 0.0,
+      "evidence_group_recall": 0.0,
+      "evidence_f1": 0.0,
+      "candidate_group_recall": 1.0,
+      "evidence_groups": [
+        {
+          "id": "two-step",
+          "candidate_found": true,
+          "passed": false,
+          "matched_chunk_ids": []
+        }
+      ],
+      "retrieval_ms": 108.65,
+      "total_case_ms": 108.703
+    },
+    {
+      "id": "real-principles-barriers",
+      "category": "root-book-principles",
+      "expected_status": "answerable",
+      "retrieval_status": "candidates_found",
+      "judged_status": "answerable",
+      "semantic_decision_present": true,
+      "semantic_decision_valid": true,
+      "execution_success": true,
+      "case_passed": true,
+      "boundary_correct": true,
+      "evidence_precision": 1.0,
+      "evidence_group_recall": 1.0,
+      "evidence_f1": 1.0,
+      "candidate_group_recall": 1.0,
+      "evidence_groups": [
+        {
+          "id": "barriers-and-antidote",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_ba3e95d73199#pdf-page=244&chunk=1"
+          ]
+        }
+      ],
+      "retrieval_ms": 99.183,
+      "total_case_ms": 99.274
+    },
+    {
+      "id": "real-stocks-canslim",
+      "category": "root-book-stocks",
+      "expected_status": "answerable",
+      "retrieval_status": "candidates_found",
+      "judged_status": "answerable",
+      "semantic_decision_present": true,
+      "semantic_decision_valid": true,
+      "execution_success": true,
+      "case_passed": true,
+      "boundary_correct": true,
+      "evidence_precision": 1.0,
+      "evidence_group_recall": 1.0,
+      "evidence_f1": 1.0,
+      "candidate_group_recall": 1.0,
+      "evidence_groups": [
+        {
+          "id": "formula",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_be0559204ea0#pdf-page=15&chunk=1"
+          ]
+        }
+      ],
+      "retrieval_ms": 107.893,
+      "total_case_ms": 107.945
+    },
+    {
+      "id": "real-stocks-cup-handle",
+      "category": "root-book-stocks",
+      "expected_status": "answerable",
+      "retrieval_status": "candidates_found",
+      "judged_status": "answerable",
+      "semantic_decision_present": true,
+      "semantic_decision_valid": true,
+      "execution_success": true,
+      "case_passed": true,
+      "boundary_correct": true,
+      "evidence_precision": 1.0,
+      "evidence_group_recall": 1.0,
+      "evidence_f1": 1.0,
+      "candidate_group_recall": 1.0,
+      "evidence_groups": [
+        {
+          "id": "formation-context",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_be0559204ea0#pdf-page=37&chunk=2"
+          ]
+        }
+      ],
+      "retrieval_ms": 96.029,
+      "total_case_ms": 96.08
+    },
+    {
+      "id": "real-stocks-loss-rule",
+      "category": "root-book-stocks",
+      "expected_status": "answerable",
+      "retrieval_status": "candidates_found",
+      "judged_status": "answerable",
+      "semantic_decision_present": true,
+      "semantic_decision_valid": true,
+      "execution_success": true,
+      "case_passed": true,
+      "boundary_correct": true,
+      "evidence_precision": 1.0,
+      "evidence_group_recall": 1.0,
+      "evidence_f1": 1.0,
+      "candidate_group_recall": 1.0,
+      "evidence_groups": [
+        {
+          "id": "loss-threshold",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_be0559204ea0#pdf-page=198&chunk=2"
+          ]
+        }
+      ],
+      "retrieval_ms": 113.98,
+      "total_case_ms": 114.03
+    },
+    {
+      "id": "real-minto-pyramid",
+      "category": "root-book-minto",
+      "expected_status": "answerable",
+      "retrieval_status": "candidates_found",
+      "judged_status": "answerable",
+      "semantic_decision_present": true,
+      "semantic_decision_valid": true,
+      "execution_success": true,
+      "case_passed": true,
+      "boundary_correct": true,
+      "evidence_precision": 1.0,
+      "evidence_group_recall": 1.0,
+      "evidence_f1": 1.0,
+      "candidate_group_recall": 1.0,
+      "evidence_groups": [
+        {
+          "id": "cognitive-rationale",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_0e1a93e1c343#pdf-page=22&chunk=1"
+          ]
+        }
+      ],
+      "retrieval_ms": 97.162,
+      "total_case_ms": 97.219
+    },
+    {
+      "id": "real-minto-scq",
+      "category": "root-book-minto",
+      "expected_status": "answerable",
+      "retrieval_status": "candidates_found",
+      "judged_status": "answerable",
+      "semantic_decision_present": true,
+      "semantic_decision_valid": true,
+      "execution_success": true,
+      "case_passed": true,
+      "boundary_correct": true,
+      "evidence_precision": 1.0,
+      "evidence_group_recall": 1.0,
+      "evidence_f1": 1.0,
+      "candidate_group_recall": 1.0,
+      "evidence_groups": [
+        {
+          "id": "scq-flow",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_0e1a93e1c343#pdf-page=256&chunk=1"
+          ]
+        }
+      ],
+      "retrieval_ms": 92.036,
+      "total_case_ms": 92.084
+    },
+    {
+      "id": "real-minto-mece",
+      "category": "root-book-minto",
+      "expected_status": "answerable",
+      "retrieval_status": "candidates_found",
+      "judged_status": "answerable",
+      "semantic_decision_present": true,
+      "semantic_decision_valid": true,
+      "execution_success": true,
+      "case_passed": true,
+      "boundary_correct": true,
+      "evidence_precision": 1.0,
+      "evidence_group_recall": 1.0,
+      "evidence_f1": 1.0,
+      "candidate_group_recall": 1.0,
+      "evidence_groups": [
+        {
+          "id": "grouping-test",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_0e1a93e1c343#pdf-page=111&chunk=1"
+          ]
+        }
+      ],
+      "retrieval_ms": 105.548,
+      "total_case_ms": 105.594
+    },
+    {
+      "id": "real-critical-issue-conclusion",
+      "category": "root-book-critical-thinking",
+      "expected_status": "answerable",
+      "retrieval_status": "candidates_found",
+      "judged_status": "answerable",
+      "semantic_decision_present": true,
+      "semantic_decision_valid": true,
+      "execution_success": true,
+      "case_passed": true,
+      "boundary_correct": true,
+      "evidence_precision": 1.0,
+      "evidence_group_recall": 1.0,
+      "evidence_f1": 1.0,
+      "candidate_group_recall": 1.0,
+      "evidence_groups": [
+        {
+          "id": "issue",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_803fe0a5fec5#pdf-page=31&chunk=1",
+            "doc_fe4dbf7e0a60#heading=%E6%AD%A3%E6%96%87&chunk=26"
+          ]
+        },
+        {
+          "id": "conclusion",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_803fe0a5fec5#pdf-page=31&chunk=1",
+            "doc_fe4dbf7e0a60#heading=%E6%AD%A3%E6%96%87&chunk=26"
+          ]
+        }
+      ],
+      "retrieval_ms": 135.859,
+      "total_case_ms": 135.928
+    },
+    {
+      "id": "real-critical-assumptions",
+      "category": "root-book-critical-thinking",
+      "expected_status": "answerable",
+      "retrieval_status": "candidates_found",
+      "judged_status": "answerable",
+      "semantic_decision_present": true,
+      "semantic_decision_valid": true,
+      "execution_success": true,
+      "case_passed": true,
+      "boundary_correct": true,
+      "evidence_precision": 1.0,
+      "evidence_group_recall": 1.0,
+      "evidence_f1": 1.0,
+      "candidate_group_recall": 1.0,
+      "evidence_groups": [
+        {
+          "id": "assumption-role",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_803fe0a5fec5#pdf-page=67&chunk=1"
+          ]
+        }
+      ],
+      "retrieval_ms": 97.291,
+      "total_case_ms": 97.35
+    },
+    {
+      "id": "real-critical-evidence",
+      "category": "root-book-critical-thinking",
+      "expected_status": "answerable",
+      "retrieval_status": "candidates_found",
+      "judged_status": "insufficient_evidence",
+      "semantic_decision_present": true,
+      "semantic_decision_valid": true,
+      "execution_success": true,
+      "case_passed": false,
+      "boundary_correct": false,
+      "evidence_precision": 0.0,
+      "evidence_group_recall": 0.0,
+      "evidence_f1": 0.0,
+      "candidate_group_recall": 1.0,
+      "evidence_groups": [
+        {
+          "id": "insufficient-evidence",
+          "candidate_found": true,
+          "passed": false,
+          "matched_chunk_ids": []
+        }
+      ],
+      "retrieval_ms": 110.526,
+      "total_case_ms": 110.579
+    },
+    {
+      "id": "real-pm-hallucination",
+      "category": "ai-product-manager",
+      "expected_status": "answerable",
+      "retrieval_status": "candidates_found",
+      "judged_status": "answerable",
+      "semantic_decision_present": true,
+      "semantic_decision_valid": true,
+      "execution_success": true,
+      "case_passed": true,
+      "boundary_correct": true,
+      "evidence_precision": 1.0,
+      "evidence_group_recall": 1.0,
+      "evidence_f1": 1.0,
+      "candidate_group_recall": 1.0,
+      "evidence_groups": [
+        {
+          "id": "model",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_dec83bb00634#pdf-page=12&chunk=1"
+          ]
+        },
+        {
+          "id": "retrieval",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_dec83bb00634#pdf-page=12&chunk=1"
+          ]
+        },
+        {
+          "id": "realtime-input",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_dec83bb00634#pdf-page=12&chunk=1"
+          ]
+        },
+        {
+          "id": "action-risk",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_dec83bb00634#pdf-page=12&chunk=1",
+            "doc_dec83bb00634#pdf-page=22&chunk=1"
+          ]
+        }
+      ],
+      "retrieval_ms": 191.381,
+      "total_case_ms": 191.447
+    },
+    {
+      "id": "real-pm-prompt-contract",
+      "category": "ai-product-manager",
+      "expected_status": "answerable",
+      "retrieval_status": "candidates_found",
+      "judged_status": "answerable",
+      "semantic_decision_present": true,
+      "semantic_decision_valid": true,
+      "execution_success": true,
+      "case_passed": true,
+      "boundary_correct": true,
+      "evidence_precision": 1.0,
+      "evidence_group_recall": 1.0,
+      "evidence_f1": 1.0,
+      "candidate_group_recall": 1.0,
+      "evidence_groups": [
+        {
+          "id": "contract-parts",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_dec83bb00634#pdf-page=14&chunk=1"
+          ]
+        }
+      ],
+      "retrieval_ms": 104.511,
+      "total_case_ms": 104.569
+    },
+    {
+      "id": "real-pm-rag-chain",
+      "category": "ai-product-manager",
+      "expected_status": "answerable",
+      "retrieval_status": "candidates_found",
+      "judged_status": "answerable",
+      "semantic_decision_present": true,
+      "semantic_decision_valid": true,
+      "execution_success": true,
+      "case_passed": true,
+      "boundary_correct": true,
+      "evidence_precision": 1.0,
+      "evidence_group_recall": 1.0,
+      "evidence_f1": 1.0,
+      "candidate_group_recall": 1.0,
+      "evidence_groups": [
+        {
+          "id": "ingestion",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_dec83bb00634#pdf-page=17&chunk=1"
+          ]
+        },
+        {
+          "id": "chunking",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_dec83bb00634#pdf-page=18&chunk=1"
+          ]
+        },
+        {
+          "id": "retrieval-rerank",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_dec83bb00634#pdf-page=18&chunk=1"
+          ]
+        },
+        {
+          "id": "query-understanding",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_dec83bb00634#pdf-page=19&chunk=1"
+          ]
+        },
+        {
+          "id": "grounded-generation",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_dec83bb00634#pdf-page=19&chunk=1"
+          ]
+        },
+        {
+          "id": "acl",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_dec83bb00634#pdf-page=19&chunk=1"
+          ]
+        },
+        {
+          "id": "layered-evaluation",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_dec83bb00634#pdf-page=20&chunk=1"
+          ]
+        }
+      ],
+      "retrieval_ms": 269.696,
+      "total_case_ms": 269.78
+    },
+    {
+      "id": "real-pm-interface-contract",
+      "category": "ai-product-manager",
+      "expected_status": "answerable",
+      "retrieval_status": "candidates_found",
+      "judged_status": "answerable",
+      "semantic_decision_present": true,
+      "semantic_decision_valid": true,
+      "execution_success": true,
+      "case_passed": true,
+      "boundary_correct": true,
+      "evidence_precision": 1.0,
+      "evidence_group_recall": 1.0,
+      "evidence_f1": 1.0,
+      "candidate_group_recall": 1.0,
+      "evidence_groups": [
+        {
+          "id": "state-contract",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_dec83bb00634#pdf-page=50&chunk=1"
+          ]
+        }
+      ],
+      "retrieval_ms": 101.759,
+      "total_case_ms": 101.812
+    },
+    {
+      "id": "real-comic-comfy-nodes",
+      "category": "ai-comic",
+      "expected_status": "answerable",
+      "retrieval_status": "candidates_found",
+      "judged_status": "answerable",
+      "semantic_decision_present": true,
+      "semantic_decision_valid": true,
+      "execution_success": true,
+      "case_passed": true,
+      "boundary_correct": true,
+      "evidence_precision": 1.0,
+      "evidence_group_recall": 1.0,
+      "evidence_f1": 1.0,
+      "candidate_group_recall": 1.0,
+      "evidence_groups": [
+        {
+          "id": "three-nodes",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_4858a1590b6a#pdf-page=1&chunk=1"
+          ]
+        }
+      ],
+      "retrieval_ms": 80.201,
+      "total_case_ms": 80.249
+    },
+    {
+      "id": "real-comic-consistency",
+      "category": "ai-comic",
+      "expected_status": "answerable",
+      "retrieval_status": "candidates_found",
+      "judged_status": "answerable",
+      "semantic_decision_present": true,
+      "semantic_decision_valid": true,
+      "execution_success": true,
+      "case_passed": true,
+      "boundary_correct": true,
+      "evidence_precision": 1.0,
+      "evidence_group_recall": 1.0,
+      "evidence_f1": 1.0,
+      "candidate_group_recall": 1.0,
+      "evidence_groups": [
+        {
+          "id": "character",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_2aa026ba331c#pdf-page=1&chunk=1"
+          ]
+        },
+        {
+          "id": "scene",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_2aa026ba331c#pdf-page=1&chunk=1"
+          ]
+        }
+      ],
+      "retrieval_ms": 110.477,
+      "total_case_ms": 110.528
+    },
+    {
+      "id": "real-comic-storyboard",
+      "category": "ai-comic",
+      "expected_status": "answerable",
+      "retrieval_status": "candidates_found",
+      "judged_status": "answerable",
+      "semantic_decision_present": true,
+      "semantic_decision_valid": true,
+      "execution_success": true,
+      "case_passed": true,
+      "boundary_correct": true,
+      "evidence_precision": 1.0,
+      "evidence_group_recall": 1.0,
+      "evidence_f1": 1.0,
+      "candidate_group_recall": 1.0,
+      "evidence_groups": [
+        {
+          "id": "visual",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_e6928df2337c#pdf-page=2&chunk=1"
+          ]
+        },
+        {
+          "id": "camera",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_e6928df2337c#pdf-page=2&chunk=1"
+          ]
+        },
+        {
+          "id": "sound",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_e6928df2337c#pdf-page=2&chunk=1"
+          ]
+        }
+      ],
+      "retrieval_ms": 129.416,
+      "total_case_ms": 129.47
+    },
+    {
+      "id": "real-comic-delivery",
+      "category": "ai-comic",
+      "expected_status": "answerable",
+      "retrieval_status": "candidates_found",
+      "judged_status": "answerable",
+      "semantic_decision_present": true,
+      "semantic_decision_valid": true,
+      "execution_success": true,
+      "case_passed": true,
+      "boundary_correct": true,
+      "evidence_precision": 1.0,
+      "evidence_group_recall": 1.0,
+      "evidence_f1": 1.0,
+      "candidate_group_recall": 1.0,
+      "evidence_groups": [
+        {
+          "id": "format",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_589150767916#heading=%E6%AD%A3%E6%96%87&chunk=1",
+            "doc_a3378792d2da#pdf-page=2&chunk=1"
+          ]
+        },
+        {
+          "id": "resolution",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_589150767916#heading=%E6%AD%A3%E6%96%87&chunk=1",
+            "doc_a3378792d2da#pdf-page=2&chunk=1"
+          ]
+        },
+        {
+          "id": "fps",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_589150767916#heading=%E6%AD%A3%E6%96%87&chunk=1",
+            "doc_a3378792d2da#pdf-page=2&chunk=1"
+          ]
+        }
+      ],
+      "retrieval_ms": 125.54,
+      "total_case_ms": 125.604
+    },
+    {
+      "id": "real-obsidian-gibbs",
+      "category": "obsidian-note",
+      "expected_status": "answerable",
+      "retrieval_status": "candidates_found",
+      "judged_status": "answerable",
+      "semantic_decision_present": true,
+      "semantic_decision_valid": true,
+      "execution_success": true,
+      "case_passed": true,
+      "boundary_correct": true,
+      "evidence_precision": 1.0,
+      "evidence_group_recall": 1.0,
+      "evidence_f1": 1.0,
+      "candidate_group_recall": 1.0,
+      "evidence_groups": [
+        {
+          "id": "phase-rule",
+          "candidate_found": true,
+          "passed": true,
+          "matched_chunk_ids": [
+            "doc_7dd18ca52949#heading=Phase%20rule&chunk=1"
+          ]
+        }
+      ],
+      "retrieval_ms": 66.974,
+      "total_case_ms": 67.025
+    },
+    {
+      "id": "negative-marx-mars-contract",
+      "category": "natural-hard-negative",
+      "expected_status": "insufficient_evidence",
+      "retrieval_status": "candidates_found",
+      "judged_status": "insufficient_evidence",
+      "semantic_decision_present": true,
+      "semantic_decision_valid": true,
+      "execution_success": true,
+      "case_passed": true,
+      "boundary_correct": true,
+      "evidence_precision": null,
+      "evidence_group_recall": null,
+      "evidence_f1": null,
+      "candidate_group_recall": null,
+      "evidence_groups": [],
+      "retrieval_ms": 169.111,
+      "total_case_ms": 169.171
+    },
+    {
+      "id": "negative-principles-antibiotic",
+      "category": "natural-hard-negative",
+      "expected_status": "insufficient_evidence",
+      "retrieval_status": "candidates_found",
+      "judged_status": "insufficient_evidence",
+      "semantic_decision_present": true,
+      "semantic_decision_valid": true,
+      "execution_success": true,
+      "case_passed": true,
+      "boundary_correct": true,
+      "evidence_precision": null,
+      "evidence_group_recall": null,
+      "evidence_f1": null,
+      "candidate_group_recall": null,
+      "evidence_groups": [],
+      "retrieval_ms": 223.405,
+      "total_case_ms": 223.461
+    },
+    {
+      "id": "negative-stocks-crypto-seed",
+      "category": "natural-hard-negative",
+      "expected_status": "insufficient_evidence",
+      "retrieval_status": "candidates_found",
+      "judged_status": "insufficient_evidence",
+      "semantic_decision_present": true,
+      "semantic_decision_valid": true,
+      "execution_success": true,
+      "case_passed": true,
+      "boundary_correct": true,
+      "evidence_precision": null,
+      "evidence_group_recall": null,
+      "evidence_f1": null,
+      "candidate_group_recall": null,
+      "evidence_groups": [],
+      "retrieval_ms": 71.08,
+      "total_case_ms": 71.13
+    },
+    {
+      "id": "negative-pm-anesthesia",
+      "category": "natural-hard-negative",
+      "expected_status": "insufficient_evidence",
+      "retrieval_status": "candidates_found",
+      "judged_status": "insufficient_evidence",
+      "semantic_decision_present": true,
+      "semantic_decision_valid": true,
+      "execution_success": true,
+      "case_passed": true,
+      "boundary_correct": true,
+      "evidence_precision": null,
+      "evidence_group_recall": null,
+      "evidence_f1": null,
+      "candidate_group_recall": null,
+      "evidence_groups": [],
+      "retrieval_ms": 180.521,
+      "total_case_ms": 180.583
+    },
+    {
+      "id": "negative-comic-copyright-court",
+      "category": "natural-hard-negative",
+      "expected_status": "insufficient_evidence",
+      "retrieval_status": "weak_match",
+      "judged_status": "insufficient_evidence",
+      "semantic_decision_present": true,
+      "semantic_decision_valid": true,
+      "execution_success": true,
+      "case_passed": true,
+      "boundary_correct": true,
+      "evidence_precision": null,
+      "evidence_group_recall": null,
+      "evidence_f1": null,
+      "candidate_group_recall": null,
+      "evidence_groups": [],
+      "retrieval_ms": 182.566,
+      "total_case_ms": 182.634
+    },
+    {
+      "id": "negative-gibbs-headcount",
+      "category": "natural-hard-negative",
+      "expected_status": "insufficient_evidence",
+      "retrieval_status": "candidates_found",
+      "judged_status": "insufficient_evidence",
+      "semantic_decision_present": true,
+      "semantic_decision_valid": true,
+      "execution_success": true,
+      "case_passed": true,
+      "boundary_correct": true,
+      "evidence_precision": null,
+      "evidence_group_recall": null,
+      "evidence_f1": null,
+      "candidate_group_recall": null,
+      "evidence_groups": [],
+      "retrieval_ms": 161.967,
+      "total_case_ms": 162.036
+    }
+  ],
+  "privacy_note": "No source text, local path, user identifier, credential, or raw trace is included."
+}

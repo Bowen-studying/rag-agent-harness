@@ -3,7 +3,7 @@ from __future__ import annotations
 import math
 import re
 from collections import Counter
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 
@@ -53,7 +53,11 @@ class Chunk:
     chunk_id: str
     source: str
     text: str
-    terms: Counter[str]
+    terms: Counter[str] | None
+    doc_id: str = ""
+    locator: str = ""
+    source_type: str = "text"
+    metadata: dict = field(default_factory=dict)
 
 
 @dataclass(frozen=True)
@@ -62,17 +66,36 @@ class SearchResult:
     source: str
     text: str
     score: float
+    query_coverage: float = 0.0
+    doc_id: str = ""
+    locator: str = ""
+    source_type: str = "text"
+    metadata: dict = field(default_factory=dict)
 
 
 class DocumentIndex:
     def __init__(self, chunks: list[Chunk], *, k1: float = 1.5, b: float = 0.75):
-        self.chunks = chunks
+        self.chunks = [
+            chunk
+            if chunk.terms is not None
+            else Chunk(
+                chunk_id=chunk.chunk_id,
+                source=chunk.source,
+                text=chunk.text,
+                terms=Counter(tokenize(chunk.text)),
+                doc_id=chunk.doc_id,
+                locator=chunk.locator,
+                source_type=chunk.source_type,
+                metadata=chunk.metadata,
+            )
+            for chunk in chunks
+        ]
         self.k1 = k1
         self.b = b
         self.document_frequency = Counter()
-        for chunk in chunks:
+        for chunk in self.chunks:
             self.document_frequency.update(set(chunk.terms))
-        self.average_document_length = sum(sum(chunk.terms.values()) for chunk in chunks) / len(chunks)
+        self.average_document_length = sum(sum(chunk.terms.values()) for chunk in self.chunks) / len(self.chunks)
 
     @classmethod
     def from_directory(cls, directory: str | Path) -> "DocumentIndex":
@@ -102,8 +125,8 @@ class DocumentIndex:
     def search(self, query: str, top_k: int = 3) -> list[SearchResult]:
         if not query.strip():
             raise ValueError("query must not be empty")
-        if not 1 <= top_k <= 10:
-            raise ValueError("top_k must be between 1 and 10")
+        if not 1 <= top_k <= 50:
+            raise ValueError("top_k must be between 1 and 50")
         query_terms = Counter(tokenize(query))
         scored: list[SearchResult] = []
         total = len(self.chunks)
@@ -119,7 +142,22 @@ class DocumentIndex:
                 idf = math.log(1 + (total - document_frequency + 0.5) / (document_frequency + 0.5))
                 tf_weight = tf * (self.k1 + 1) / (tf + self.k1 * length_norm)
                 score += idf * tf_weight * qtf
+            score *= float(chunk.metadata.get("source_priority", 1.0))
             if score > 0:
-                scored.append(SearchResult(chunk.chunk_id, chunk.source, chunk.text, round(score, 6)))
+                matched_terms = sum(1 for term in query_terms if chunk.terms.get(term, 0))
+                coverage = matched_terms / len(query_terms) if query_terms else 0.0
+                scored.append(
+                    SearchResult(
+                        chunk.chunk_id,
+                        chunk.source,
+                        chunk.text,
+                        round(score, 6),
+                        round(coverage, 4),
+                        chunk.doc_id,
+                        chunk.locator,
+                        chunk.source_type,
+                        chunk.metadata,
+                    )
+                )
         scored.sort(key=lambda item: (-item.score, item.chunk_id))
         return scored[:top_k]

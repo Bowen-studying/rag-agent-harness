@@ -5,3 +5,9 @@ __pycache__/
 artifacts/traces*/
 artifacts/checkpoints/*.json
 artifacts/*.local.json
+kb_txt/
+.local/
+kb_sources.local.toml
+eval_kb_cases.local.json
+artifacts/kb_traces/
+artifacts/kb_eval_report.json

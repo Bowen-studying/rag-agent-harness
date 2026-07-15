@@ -1,0 +1,70 @@
+[
+  {
+    "id": "feynman-correct-contradiction",
+    "topic": "矛盾的同一性与斗争性",
+    "student_explanation": "同一性表示对立面相互依存并可在条件下转化，斗争性表示相互排斥；两者同时存在，不是先有一个再有另一个。",
+    "expected_status": "accurate",
+    "expected_issue_types": [],
+    "acceptable_citations": [{"doc_id": "doc_02f4ef0a60f0", "locator": "pdf-page=52"}]
+  },
+  {
+    "id": "feynman-correct-rag",
+    "topic": "RAG职责",
+    "student_explanation": "RAG先找候选证据，再让模型依据证据组织答案；它不能保证必然正确，所以要分别评测召回、重排和生成。",
+    "expected_status": "accurate",
+    "expected_issue_types": [],
+    "acceptable_citations": [{"doc_id": "doc_dec83bb00634", "locator": "pdf-page=17"}, {"doc_id": "doc_dec83bb00634", "locator": "pdf-page=20"}]
+  },
+  {
+    "id": "feynman-omission-practice",
+    "topic": "实践对认识的决定作用",
+    "student_explanation": "实践是认识的来源，也是检验真理的标准。",
+    "expected_status": "has_omission",
+    "expected_issue_types": ["omission"],
+    "expected_missing_points": ["认识发展的动力", "认识的目的"],
+    "acceptable_citations": [{"doc_id": "doc_02f4ef0a60f0", "locator": "pdf-page=87"}, {"doc_id": "doc_02f4ef0a60f0", "locator": "pdf-page=88"}]
+  },
+  {
+    "id": "feynman-omission-storyboard",
+    "topic": "分镜三要素",
+    "student_explanation": "分镜要写清楚谁在哪里做什么，以及景别和镜头运动。",
+    "expected_status": "has_omission",
+    "expected_issue_types": ["omission"],
+    "expected_missing_points": ["声音信息"],
+    "acceptable_citations": [{"doc_id": "doc_e6928df2337c", "locator": "pdf-page=2"}]
+  },
+  {
+    "id": "feynman-error-contradiction-order",
+    "topic": "矛盾的同一性与斗争性",
+    "student_explanation": "事物先形成同一性，稳定之后才出现斗争性。",
+    "expected_status": "factual_error",
+    "expected_issue_types": ["factual_conflict"],
+    "expected_conflict": "同一性和斗争性相互联结，不存在先后顺序。",
+    "acceptable_citations": [{"doc_id": "doc_02f4ef0a60f0", "locator": "pdf-page=52"}]
+  },
+  {
+    "id": "feynman-error-prompt-boundary",
+    "topic": "Prompt与安全边界",
+    "student_explanation": "只要在Prompt中写禁止越权，就不需要服务端权限过滤。",
+    "expected_status": "factual_error",
+    "expected_issue_types": ["factual_conflict"],
+    "expected_conflict": "权限必须在检索前由服务端执行，不能只依赖Prompt。",
+    "acceptable_citations": [{"doc_id": "doc_dec83bb00634", "locator": "pdf-page=19"}]
+  },
+  {
+    "id": "feynman-boundary-mars-medicine",
+    "topic": "火星细菌感染用药",
+    "student_explanation": "请检查我给出的抗生素剂量是否正确。",
+    "expected_status": "insufficient_evidence",
+    "expected_issue_types": ["knowledge_boundary"],
+    "acceptable_citations": []
+  },
+  {
+    "id": "feynman-boundary-ambiguous",
+    "topic": "它为什么失败",
+    "student_explanation": "它失败是因为参数不对，你判断我的理解。",
+    "expected_status": "needs_clarification",
+    "expected_issue_types": ["ambiguous_input"],
+    "acceptable_citations": []
+  }
+]

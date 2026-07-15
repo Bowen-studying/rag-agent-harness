@@ -1,0 +1,923 @@
+[
+  {
+    "id": "real-marx-features",
+    "category": "root-book-marx",
+    "question": "马克思主义的四个基本特征是什么？",
+    "expected_status": "answerable",
+    "aspects": [
+      "马克思主义 科学性 人民性 实践性 发展性"
+    ],
+    "gold_evidence_groups": [
+      {
+        "id": "four-features",
+        "any_of": [
+          {
+            "doc_id": "doc_02f4ef0a60f0",
+            "locator": "pdf-page=21"
+          },
+          {
+            "doc_id": "doc_02f4ef0a60f0",
+            "locator": "pdf-page=23"
+          }
+        ]
+      }
+    ],
+    "source_manifest_sha256": "6eb39ea209632139ecf280797a431dc17c4732535a8f5c00348b9f8e15d22c4c",
+    "annotation_date": "2026-07-16"
+  },
+  {
+    "id": "real-marx-contradiction",
+    "category": "root-book-marx",
+    "question": "矛盾的同一性和斗争性分别是什么，两者是什么关系？",
+    "expected_status": "answerable",
+    "aspects": [
+      "矛盾同一性 相互依存 相互贯通",
+      "矛盾斗争性 相互排斥 相互分离",
+      "同一性斗争性 相互联结 相辅相成"
+    ],
+    "gold_evidence_groups": [
+      {
+        "id": "identity",
+        "any_of": [
+          {
+            "doc_id": "doc_02f4ef0a60f0",
+            "locator": "pdf-page=52"
+          }
+        ]
+      },
+      {
+        "id": "struggle",
+        "any_of": [
+          {
+            "doc_id": "doc_02f4ef0a60f0",
+            "locator": "pdf-page=52"
+          }
+        ]
+      },
+      {
+        "id": "relationship",
+        "any_of": [
+          {
+            "doc_id": "doc_02f4ef0a60f0",
+            "locator": "pdf-page=52"
+          }
+        ]
+      }
+    ],
+    "source_manifest_sha256": "6eb39ea209632139ecf280797a431dc17c4732535a8f5c00348b9f8e15d22c4c",
+    "annotation_date": "2026-07-16"
+  },
+  {
+    "id": "real-marx-practice",
+    "category": "root-book-marx",
+    "question": "实践对认识的决定作用表现在哪四个方面？",
+    "expected_status": "answerable",
+    "aspects": [
+      "实践是认识的来源",
+      "实践是认识发展的动力",
+      "实践是认识的目的",
+      "实践是检验认识真理性的唯一标准"
+    ],
+    "gold_evidence_groups": [
+      {
+        "id": "source",
+        "any_of": [
+          {
+            "doc_id": "doc_02f4ef0a60f0",
+            "locator": "pdf-page=87"
+          }
+        ]
+      },
+      {
+        "id": "motivation",
+        "any_of": [
+          {
+            "doc_id": "doc_02f4ef0a60f0",
+            "locator": "pdf-page=87"
+          }
+        ]
+      },
+      {
+        "id": "purpose",
+        "any_of": [
+          {
+            "doc_id": "doc_02f4ef0a60f0",
+            "locator": "pdf-page=88"
+          }
+        ]
+      },
+      {
+        "id": "test",
+        "any_of": [
+          {
+            "doc_id": "doc_02f4ef0a60f0",
+            "locator": "pdf-page=88"
+          }
+        ]
+      }
+    ],
+    "source_manifest_sha256": "6eb39ea209632139ecf280797a431dc17c4732535a8f5c00348b9f8e15d22c4c",
+    "annotation_date": "2026-07-16"
+  },
+  {
+    "id": "real-marx-value-evaluation",
+    "category": "root-book-marx",
+    "question": "什么是价值评价，它主要有哪些特点？",
+    "expected_status": "answerable",
+    "aspects": [
+      "价值评价 主体 客体 价值大小 评判 判断 特点"
+    ],
+    "gold_evidence_groups": [
+      {
+        "id": "definition-and-features",
+        "any_of": [
+          {
+            "doc_id": "doc_02f4ef0a60f0",
+            "locator": "pdf-page=113"
+          }
+        ]
+      }
+    ],
+    "source_manifest_sha256": "6eb39ea209632139ecf280797a431dc17c4732535a8f5c00348b9f8e15d22c4c",
+    "annotation_date": "2026-07-16"
+  },
+  {
+    "id": "real-principles-five-step",
+    "category": "root-book-principles",
+    "question": "Ray Dalio的五步流程包含哪些步骤？",
+    "expected_status": "answerable",
+    "aspects": [
+      "five distinct steps clear goals",
+      "identify problems root causes",
+      "design plans push results"
+    ],
+    "gold_evidence_groups": [
+      {
+        "id": "goals",
+        "any_of": [
+          {
+            "doc_id": "doc_ba3e95d73199",
+            "locator": "pdf-page=160"
+          }
+        ]
+      },
+      {
+        "id": "diagnose",
+        "any_of": [
+          {
+            "doc_id": "doc_ba3e95d73199",
+            "locator": "pdf-page=160"
+          }
+        ]
+      },
+      {
+        "id": "design-and-do",
+        "any_of": [
+          {
+            "doc_id": "doc_ba3e95d73199",
+            "locator": "pdf-page=160"
+          }
+        ]
+      }
+    ],
+    "source_manifest_sha256": "6eb39ea209632139ecf280797a431dc17c4732535a8f5c00348b9f8e15d22c4c",
+    "annotation_date": "2026-07-16"
+  },
+  {
+    "id": "real-principles-open-mindedness",
+    "category": "root-book-principles",
+    "question": "What does radical open-mindedness require?",
+    "expected_status": "answerable",
+    "aspects": [
+      "radically open-minded sincerely believe might not know best path"
+    ],
+    "gold_evidence_groups": [
+      {
+        "id": "requirements",
+        "any_of": [
+          {
+            "doc_id": "doc_ba3e95d73199",
+            "locator": "pdf-page=175"
+          },
+          {
+            "doc_id": "doc_ba3e95d73199",
+            "locator": "pdf-page=249"
+          }
+        ]
+      }
+    ],
+    "source_manifest_sha256": "6eb39ea209632139ecf280797a431dc17c4732535a8f5c00348b9f8e15d22c4c",
+    "annotation_date": "2026-07-16"
+  },
+  {
+    "id": "real-principles-decision",
+    "category": "root-book-principles",
+    "question": "What is the two-step process for decision making?",
+    "expected_status": "answerable",
+    "aspects": [
+      "decision making two-step process first take relevant information then decide"
+    ],
+    "gold_evidence_groups": [
+      {
+        "id": "two-step",
+        "any_of": [
+          {
+            "doc_id": "doc_ba3e95d73199",
+            "locator": "pdf-page=175"
+          },
+          {
+            "doc_id": "doc_ba3e95d73199",
+            "locator": "pdf-page=249"
+          }
+        ]
+      }
+    ],
+    "source_manifest_sha256": "6eb39ea209632139ecf280797a431dc17c4732535a8f5c00348b9f8e15d22c4c",
+    "annotation_date": "2026-07-16"
+  },
+  {
+    "id": "real-principles-barriers",
+    "category": "root-book-principles",
+    "question": "What are the ego barrier and blind spot barrier, and what is the antidote?",
+    "expected_status": "answerable",
+    "aspects": [
+      "ego barrier blind spot barrier radical open-mindedness antidote"
+    ],
+    "gold_evidence_groups": [
+      {
+        "id": "barriers-and-antidote",
+        "any_of": [
+          {
+            "doc_id": "doc_ba3e95d73199",
+            "locator": "pdf-page=244"
+          }
+        ]
+      }
+    ],
+    "source_manifest_sha256": "6eb39ea209632139ecf280797a431dc17c4732535a8f5c00348b9f8e15d22c4c",
+    "annotation_date": "2026-07-16"
+  },
+  {
+    "id": "real-stocks-canslim",
+    "category": "root-book-stocks",
+    "question": "What does CAN SLIM represent in the stock-selection system?",
+    "expected_status": "answerable",
+    "aspects": [
+      "CAN SLIM seven chief characteristics greatest winning stocks"
+    ],
+    "gold_evidence_groups": [
+      {
+        "id": "formula",
+        "any_of": [
+          {
+            "doc_id": "doc_be0559204ea0",
+            "locator": "pdf-page=15"
+          }
+        ]
+      }
+    ],
+    "source_manifest_sha256": "6eb39ea209632139ecf280797a431dc17c4732535a8f5c00348b9f8e15d22c4c",
+    "annotation_date": "2026-07-16"
+  },
+  {
+    "id": "real-stocks-cup-handle",
+    "category": "root-book-stocks",
+    "question": "When do most cup-with-handle bases form?",
+    "expected_status": "answerable",
+    "aspects": [
+      "90% cup with handles formed during market corrections"
+    ],
+    "gold_evidence_groups": [
+      {
+        "id": "formation-context",
+        "any_of": [
+          {
+            "doc_id": "doc_be0559204ea0",
+            "locator": "pdf-page=37"
+          }
+        ]
+      }
+    ],
+    "source_manifest_sha256": "6eb39ea209632139ecf280797a431dc17c4732535a8f5c00348b9f8e15d22c4c",
+    "annotation_date": "2026-07-16"
+  },
+  {
+    "id": "real-stocks-loss-rule",
+    "category": "root-book-stocks",
+    "question": "What loss-cutting rule does the book recommend?",
+    "expected_status": "answerable",
+    "aspects": [
+      "recommend cutting all losses at 7% or 8% rules protect money"
+    ],
+    "gold_evidence_groups": [
+      {
+        "id": "loss-threshold",
+        "any_of": [
+          {
+            "doc_id": "doc_be0559204ea0",
+            "locator": "pdf-page=198"
+          }
+        ]
+      }
+    ],
+    "source_manifest_sha256": "6eb39ea209632139ecf280797a431dc17c4732535a8f5c00348b9f8e15d22c4c",
+    "annotation_date": "2026-07-16"
+  },
+  {
+    "id": "real-minto-pyramid",
+    "category": "root-book-minto",
+    "question": "Why does a pyramid structure make a document easier to understand?",
+    "expected_status": "answerable",
+    "aspects": [
+      "mind automatically sorts information pyramidal groupings easier comprehend presorted"
+    ],
+    "gold_evidence_groups": [
+      {
+        "id": "cognitive-rationale",
+        "any_of": [
+          {
+            "doc_id": "doc_0e1a93e1c343",
+            "locator": "pdf-page=22"
+          }
+        ]
+      }
+    ],
+    "source_manifest_sha256": "6eb39ea209632139ecf280797a431dc17c4732535a8f5c00348b9f8e15d22c4c",
+    "annotation_date": "2026-07-16"
+  },
+  {
+    "id": "real-minto-scq",
+    "category": "root-book-minto",
+    "question": "How do Situation, Complication and Question work in an introduction?",
+    "expected_status": "answerable",
+    "aspects": [
+      "Situation Complication triggers Question document gives Answer introduction"
+    ],
+    "gold_evidence_groups": [
+      {
+        "id": "scq-flow",
+        "any_of": [
+          {
+            "doc_id": "doc_0e1a93e1c343",
+            "locator": "pdf-page=39"
+          },
+          {
+            "doc_id": "doc_0e1a93e1c343",
+            "locator": "pdf-page=256"
+          }
+        ]
+      }
+    ],
+    "source_manifest_sha256": "6eb39ea209632139ecf280797a431dc17c4732535a8f5c00348b9f8e15d22c4c",
+    "annotation_date": "2026-07-16"
+  },
+  {
+    "id": "real-minto-mece",
+    "category": "root-book-minto",
+    "question": "How does the book test whether a grouping is mutually exclusive and collectively complete?",
+    "expected_status": "answerable",
+    "aspects": [
+      "prove mutually exclusive characteristic common included all known items grouping"
+    ],
+    "gold_evidence_groups": [
+      {
+        "id": "grouping-test",
+        "any_of": [
+          {
+            "doc_id": "doc_0e1a93e1c343",
+            "locator": "pdf-page=111"
+          }
+        ]
+      }
+    ],
+    "source_manifest_sha256": "6eb39ea209632139ecf280797a431dc17c4732535a8f5c00348b9f8e15d22c4c",
+    "annotation_date": "2026-07-16"
+  },
+  {
+    "id": "real-critical-issue-conclusion",
+    "category": "root-book-critical-thinking",
+    "question": "How are an issue and a conclusion distinguished?",
+    "expected_status": "answerable",
+    "aspects": [
+      "issue question stimulating discussion controversy",
+      "conclusion position writer taking with respect to question"
+    ],
+    "gold_evidence_groups": [
+      {
+        "id": "issue",
+        "any_of": [
+          {
+            "doc_id": "doc_803fe0a5fec5",
+            "locator": "pdf-page=31"
+          },
+          {
+            "doc_id": "doc_803fe0a5fec5",
+            "locator": "pdf-page=32"
+          },
+          {
+            "doc_id": "doc_fe4dbf7e0a60",
+            "locator": "heading=%E6%AD%A3%E6%96%87",
+            "allow_prefix": true
+          }
+        ]
+      },
+      {
+        "id": "conclusion",
+        "any_of": [
+          {
+            "doc_id": "doc_803fe0a5fec5",
+            "locator": "pdf-page=31"
+          },
+          {
+            "doc_id": "doc_803fe0a5fec5",
+            "locator": "pdf-page=32"
+          },
+          {
+            "doc_id": "doc_fe4dbf7e0a60",
+            "locator": "heading=%E6%AD%A3%E6%96%87",
+            "allow_prefix": true
+          }
+        ]
+      }
+    ],
+    "source_manifest_sha256": "6eb39ea209632139ecf280797a431dc17c4732535a8f5c00348b9f8e15d22c4c",
+    "annotation_date": "2026-07-16"
+  },
+  {
+    "id": "real-critical-assumptions",
+    "category": "root-book-critical-thinking",
+    "question": "Why must a critical thinker identify value and descriptive assumptions?",
+    "expected_status": "answerable",
+    "aspects": [
+      "value descriptive assumptions hidden unstated beliefs invisible structure argument"
+    ],
+    "gold_evidence_groups": [
+      {
+        "id": "assumption-role",
+        "any_of": [
+          {
+            "doc_id": "doc_803fe0a5fec5",
+            "locator": "pdf-page=67"
+          },
+          {
+            "doc_id": "doc_803fe0a5fec5",
+            "locator": "pdf-page=69"
+          }
+        ]
+      }
+    ],
+    "source_manifest_sha256": "6eb39ea209632139ecf280797a431dc17c4732535a8f5c00348b9f8e15d22c4c",
+    "annotation_date": "2026-07-16"
+  },
+  {
+    "id": "real-critical-evidence",
+    "category": "root-book-critical-thinking",
+    "question": "What should a writer do when the available evidence cannot reliably support a claim?",
+    "expected_status": "answerable",
+    "aspects": [
+      "unable find evidence reliably support claim poor evidence personal examples testimonials"
+    ],
+    "gold_evidence_groups": [
+      {
+        "id": "insufficient-evidence",
+        "any_of": [
+          {
+            "doc_id": "doc_803fe0a5fec5",
+            "locator": "pdf-page=131"
+          }
+        ]
+      }
+    ],
+    "source_manifest_sha256": "6eb39ea209632139ecf280797a431dc17c4732535a8f5c00348b9f8e15d22c4c",
+    "annotation_date": "2026-07-16"
+  },
+  {
+    "id": "real-pm-hallucination",
+    "category": "ai-product-manager",
+    "question": "AI产品中的幻觉可能来自哪些不同环节，应怎样分别处理？",
+    "expected_status": "answerable",
+    "aspects": [
+      "幻觉 模型记忆不可靠 知识缺失 RAG",
+      "检索错误 旧版本 版本过滤 重排",
+      "实时状态缺失 工具 输入不完整 澄清",
+      "动作风险 权限 确认 幂等 审计"
+    ],
+    "gold_evidence_groups": [
+      {
+        "id": "model",
+        "any_of": [
+          {
+            "doc_id": "doc_dec83bb00634",
+            "locator": "pdf-page=12"
+          }
+        ]
+      },
+      {
+        "id": "retrieval",
+        "any_of": [
+          {
+            "doc_id": "doc_dec83bb00634",
+            "locator": "pdf-page=12"
+          }
+        ]
+      },
+      {
+        "id": "realtime-input",
+        "any_of": [
+          {
+            "doc_id": "doc_dec83bb00634",
+            "locator": "pdf-page=12"
+          }
+        ]
+      },
+      {
+        "id": "action-risk",
+        "any_of": [
+          {
+            "doc_id": "doc_dec83bb00634",
+            "locator": "pdf-page=12"
+          },
+          {
+            "doc_id": "doc_dec83bb00634",
+            "locator": "pdf-page=22"
+          }
+        ]
+      }
+    ],
+    "source_manifest_sha256": "6eb39ea209632139ecf280797a431dc17c4732535a8f5c00348b9f8e15d22c4c",
+    "annotation_date": "2026-07-16"
+  },
+  {
+    "id": "real-pm-prompt-contract",
+    "category": "ai-product-manager",
+    "question": "一个可测试的Prompt至少要明确哪些组成部分？",
+    "expected_status": "answerable",
+    "aspects": [
+      "Prompt 角色和目标 业务背景 输入材料 执行步骤 判断标准 约束 输出格式 信息不足 冲突"
+    ],
+    "gold_evidence_groups": [
+      {
+        "id": "contract-parts",
+        "any_of": [
+          {
+            "doc_id": "doc_dec83bb00634",
+            "locator": "pdf-page=14"
+          }
+        ]
+      }
+    ],
+    "source_manifest_sha256": "6eb39ea209632139ecf280797a431dc17c4732535a8f5c00348b9f8e15d22c4c",
+    "annotation_date": "2026-07-16"
+  },
+  {
+    "id": "real-pm-rag-chain",
+    "category": "ai-product-manager",
+    "question": "RAG从原始文档到受证据约束的答案，关键环节和边界是什么？",
+    "expected_status": "answerable",
+    "aspects": [
+      "RAG 原始文档 治理 解析 清洗 元数据",
+      "切片 标题路径 重叠 具体 上下文",
+      "关键词 向量 混合检索 Top20 重排 Top3",
+      "查询理解 改写 保留原始问题",
+      "生成 只依据证据 逐项引用 证据不足 冲突",
+      "权限 检索前 ACL 审计",
+      "分层指标 检索 重排 生成 用户"
+    ],
+    "gold_evidence_groups": [
+      {
+        "id": "ingestion",
+        "any_of": [
+          {
+            "doc_id": "doc_dec83bb00634",
+            "locator": "pdf-page=17"
+          }
+        ]
+      },
+      {
+        "id": "chunking",
+        "any_of": [
+          {
+            "doc_id": "doc_dec83bb00634",
+            "locator": "pdf-page=18"
+          }
+        ]
+      },
+      {
+        "id": "retrieval-rerank",
+        "any_of": [
+          {
+            "doc_id": "doc_dec83bb00634",
+            "locator": "pdf-page=18"
+          }
+        ]
+      },
+      {
+        "id": "query-understanding",
+        "any_of": [
+          {
+            "doc_id": "doc_dec83bb00634",
+            "locator": "pdf-page=19"
+          }
+        ]
+      },
+      {
+        "id": "grounded-generation",
+        "any_of": [
+          {
+            "doc_id": "doc_dec83bb00634",
+            "locator": "pdf-page=19"
+          }
+        ]
+      },
+      {
+        "id": "acl",
+        "any_of": [
+          {
+            "doc_id": "doc_dec83bb00634",
+            "locator": "pdf-page=19"
+          }
+        ]
+      },
+      {
+        "id": "layered-evaluation",
+        "any_of": [
+          {
+            "doc_id": "doc_dec83bb00634",
+            "locator": "pdf-page=20"
+          }
+        ]
+      }
+    ],
+    "source_manifest_sha256": "6eb39ea209632139ecf280797a431dc17c4732535a8f5c00348b9f8e15d22c4c",
+    "annotation_date": "2026-07-16"
+  },
+  {
+    "id": "real-pm-interface-contract",
+    "category": "ai-product-manager",
+    "question": "为什么AI接口不能只返回answer字符串，还需要哪些状态信息？",
+    "expected_status": "answerable",
+    "aspects": [
+      "返回只有 answer 前端 无法区分 澄清 拒答 工具失败 人工升级 citations status"
+    ],
+    "gold_evidence_groups": [
+      {
+        "id": "state-contract",
+        "any_of": [
+          {
+            "doc_id": "doc_dec83bb00634",
+            "locator": "pdf-page=50"
+          }
+        ]
+      }
+    ],
+    "source_manifest_sha256": "6eb39ea209632139ecf280797a431dc17c4732535a8f5c00348b9f8e15d22c4c",
+    "annotation_date": "2026-07-16"
+  },
+  {
+    "id": "real-comic-comfy-nodes",
+    "category": "ai-comic",
+    "question": "ComfyUI图生视频的三类核心节点是什么？",
+    "expected_status": "answerable",
+    "aspects": [
+      "ComfyUI 图生视频 三大核心节点 Load Image Save Video 帧数 帧率"
+    ],
+    "gold_evidence_groups": [
+      {
+        "id": "three-nodes",
+        "any_of": [
+          {
+            "doc_id": "doc_4858a1590b6a",
+            "locator": "pdf-page=1"
+          }
+        ]
+      }
+    ],
+    "source_manifest_sha256": "6eb39ea209632139ecf280797a431dc17c4732535a8f5c00348b9f8e15d22c4c",
+    "annotation_date": "2026-07-16"
+  },
+  {
+    "id": "real-comic-consistency",
+    "category": "ai-comic",
+    "question": "漫剧制作中怎样用垫图保持角色和场景一致性？",
+    "expected_status": "answerable",
+    "aspects": [
+      "垫图 角色一致性 固定角色形象 避免换脸",
+      "场景一致性 上传场景垫图 不同状态"
+    ],
+    "gold_evidence_groups": [
+      {
+        "id": "character",
+        "any_of": [
+          {
+            "doc_id": "doc_2aa026ba331c",
+            "locator": "pdf-page=1"
+          }
+        ]
+      },
+      {
+        "id": "scene",
+        "any_of": [
+          {
+            "doc_id": "doc_2aa026ba331c",
+            "locator": "pdf-page=1"
+          }
+        ]
+      }
+    ],
+    "source_manifest_sha256": "6eb39ea209632139ecf280797a431dc17c4732535a8f5c00348b9f8e15d22c4c",
+    "annotation_date": "2026-07-16"
+  },
+  {
+    "id": "real-comic-storyboard",
+    "category": "ai-comic",
+    "question": "分镜的核心三要素分别包含什么？",
+    "expected_status": "answerable",
+    "aspects": [
+      "分镜 画面内容 谁 在哪 做什么",
+      "分镜 镜头信息 景别 角度 方向 镜头运动",
+      "分镜 声音信息 音效 配乐 文字 对白"
+    ],
+    "gold_evidence_groups": [
+      {
+        "id": "visual",
+        "any_of": [
+          {
+            "doc_id": "doc_e6928df2337c",
+            "locator": "pdf-page=2"
+          }
+        ]
+      },
+      {
+        "id": "camera",
+        "any_of": [
+          {
+            "doc_id": "doc_e6928df2337c",
+            "locator": "pdf-page=2"
+          }
+        ]
+      },
+      {
+        "id": "sound",
+        "any_of": [
+          {
+            "doc_id": "doc_e6928df2337c",
+            "locator": "pdf-page=2"
+          }
+        ]
+      }
+    ],
+    "source_manifest_sha256": "6eb39ea209632139ecf280797a431dc17c4732535a8f5c00348b9f8e15d22c4c",
+    "annotation_date": "2026-07-16"
+  },
+  {
+    "id": "real-comic-delivery",
+    "category": "ai-comic",
+    "question": "AI漫剧商单交付时应怎样约定格式、分辨率和帧率？",
+    "expected_status": "answerable",
+    "aspects": [
+      "漫剧交付 文件格式 MP4 命名 开工前确认画幅",
+      "分辨率 1080×1920 1920×1080 3840×2160",
+      "帧率 24fps 30fps 60fps 漫剧商单"
+    ],
+    "gold_evidence_groups": [
+      {
+        "id": "format",
+        "any_of": [
+          {
+            "doc_id": "doc_a3378792d2da",
+            "locator": "pdf-page=1"
+          },
+          {
+            "doc_id": "doc_a3378792d2da",
+            "locator": "pdf-page=2"
+          },
+          {
+            "doc_id": "doc_589150767916",
+            "locator": "heading=%E6%AD%A3%E6%96%87",
+            "allow_prefix": true
+          }
+        ]
+      },
+      {
+        "id": "resolution",
+        "any_of": [
+          {
+            "doc_id": "doc_a3378792d2da",
+            "locator": "pdf-page=1"
+          },
+          {
+            "doc_id": "doc_a3378792d2da",
+            "locator": "pdf-page=2"
+          },
+          {
+            "doc_id": "doc_589150767916",
+            "locator": "heading=%E6%AD%A3%E6%96%87",
+            "allow_prefix": true
+          }
+        ]
+      },
+      {
+        "id": "fps",
+        "any_of": [
+          {
+            "doc_id": "doc_a3378792d2da",
+            "locator": "pdf-page=1"
+          },
+          {
+            "doc_id": "doc_a3378792d2da",
+            "locator": "pdf-page=2"
+          },
+          {
+            "doc_id": "doc_589150767916",
+            "locator": "heading=%E6%AD%A3%E6%96%87",
+            "allow_prefix": true
+          }
+        ]
+      }
+    ],
+    "source_manifest_sha256": "6eb39ea209632139ecf280797a431dc17c4732535a8f5c00348b9f8e15d22c4c",
+    "annotation_date": "2026-07-16"
+  },
+  {
+    "id": "real-obsidian-gibbs",
+    "category": "obsidian-note",
+    "question": "Gibbs phase rule在相图分析中描述什么？",
+    "expected_status": "answerable",
+    "aspects": [
+      "Gibbs phase rule phase diagram components phases degrees freedom"
+    ],
+    "gold_evidence_groups": [
+      {
+        "id": "phase-rule",
+        "any_of": [
+          {
+            "doc_id": "doc_7dd18ca52949",
+            "locator": "heading=Phase%20rule",
+            "allow_prefix": true
+          },
+          {
+            "doc_id": "doc_7dd18ca52949",
+            "locator": "heading=Chapter%206%20-%20Phase%20Diagram",
+            "allow_prefix": true
+          }
+        ]
+      }
+    ],
+    "source_manifest_sha256": "6eb39ea209632139ecf280797a431dc17c4732535a8f5c00348b9f8e15d22c4c",
+    "annotation_date": "2026-07-16"
+  },
+  {
+    "id": "negative-marx-mars-contract",
+    "category": "natural-hard-negative",
+    "question": "马克思主义教材是否说明火星殖民地量子通信卫星员工的劳动合同期限、保险理赔和续费流程？",
+    "expected_status": "insufficient_evidence",
+    "gold_evidence_groups": [],
+    "source_manifest_sha256": "6eb39ea209632139ecf280797a431dc17c4732535a8f5c00348b9f8e15d22c4c",
+    "annotation_date": "2026-07-16"
+  },
+  {
+    "id": "negative-principles-antibiotic",
+    "category": "natural-hard-negative",
+    "question": "According to Principles, after identifying a problem and setting goals, what antibiotic dosage treats a Martian bacterial infection?",
+    "expected_status": "insufficient_evidence",
+    "gold_evidence_groups": [],
+    "source_manifest_sha256": "6eb39ea209632139ecf280797a431dc17c4732535a8f5c00348b9f8e15d22c4c",
+    "annotation_date": "2026-07-16"
+  },
+  {
+    "id": "negative-stocks-crypto-seed",
+    "category": "natural-hard-negative",
+    "question": "Does the CAN SLIM stock-selection system specify an encryption algorithm and cloud backup procedure for cryptocurrency wallet seed phrases?",
+    "expected_status": "insufficient_evidence",
+    "gold_evidence_groups": [],
+    "source_manifest_sha256": "6eb39ea209632139ecf280797a431dc17c4732535a8f5c00348b9f8e15d22c4c",
+    "annotation_date": "2026-07-16"
+  },
+  {
+    "id": "negative-pm-anesthesia",
+    "category": "natural-hard-negative",
+    "question": "RAG先检索再生成，那么进行心脏手术时应选择哪一种麻醉药、剂量多少并如何监测血氧？",
+    "expected_status": "insufficient_evidence",
+    "gold_evidence_groups": [],
+    "source_manifest_sha256": "6eb39ea209632139ecf280797a431dc17c4732535a8f5c00348b9f8e15d22c4c",
+    "annotation_date": "2026-07-16"
+  },
+  {
+    "id": "negative-comic-copyright-court",
+    "category": "natural-hard-negative",
+    "question": "ComfyUI生成漫剧后如果发生跨国版权诉讼，应由哪个国家的哪一级法院管辖，具体诉讼时效多久？",
+    "expected_status": "insufficient_evidence",
+    "gold_evidence_groups": [],
+    "source_manifest_sha256": "6eb39ea209632139ecf280797a431dc17c4732535a8f5c00348b9f8e15d22c4c",
+    "annotation_date": "2026-07-16"
+  },
+  {
+    "id": "negative-gibbs-headcount",
+    "category": "natural-hard-negative",
+    "question": "利用Gibbs phase rule分析相平衡后，一家融资前的AI创业公司应该招聘多少销售、法务和客服员工？",
+    "expected_status": "insufficient_evidence",
+    "gold_evidence_groups": [],
+    "source_manifest_sha256": "6eb39ea209632139ecf280797a431dc17c4732535a8f5c00348b9f8e15d22c4c",
+    "annotation_date": "2026-07-16"
+  }
+]

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "rag-agent-harness"
-version = "0.2.0"
+version = "0.3.0"
 description = "A provider-neutral RAG agent harness with adaptive evidence selection, deterministic evaluation, and JSONL traces."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -12,10 +12,14 @@ license = {text = "MIT"}
 authors = [{name = "Bowen Zou"}]
 dependencies = []
 
+[project.optional-dependencies]
+pdf = ["PyMuPDF>=1.24"]
+
 [project.urls]
 Repository = "https://github.com/Bowen-studying/rag-agent-harness"
 
 [project.scripts]
+rag-harness = "rag_harness.cli:main"
 rag-ask = "rag_harness.cli:ask_main"
 rag-eval = "rag_harness.cli:eval_main"
 

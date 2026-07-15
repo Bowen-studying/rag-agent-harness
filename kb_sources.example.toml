@@ -1,0 +1,13 @@
+[index]
+output = ".local/index.json"
+
+[[sources]]
+type = "pdf"
+root = "/path/to/private/pdf-library"
+priority = 1.0
+
+[[sources]]
+type = "obsidian"
+root = "/path/to/Obsidian Vault"
+priority = 0.9
+exclude_directories = ["Templates", "Private"]

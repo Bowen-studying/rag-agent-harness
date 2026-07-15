@@ -2,11 +2,126 @@
 
 [![CI](https://github.com/Bowen-studying/rag-agent-harness/actions/workflows/ci.yml/badge.svg)](https://github.com/Bowen-studying/rag-agent-harness/actions/workflows/ci.yml)
 
-一个零外部依赖、可以在本地完整复现的 **RAG Agent 测试台**。它不只回答问题，还检查 Agent 是否找全证据、是否夹带错误引用、是否覆盖问题的每个要点，以及失败究竟发生在哪一步。
+一个可在本地复现的 **RAG Agent 测试台**。它不只回答问题，还检查 Agent 是否找全证据、是否夹带错误引用、是否覆盖问题的每个要点，以及失败究竟发生在哪一步。公开NovaLab样例只用Python标准库；真实PDF连接器通过可选的PyMuPDF依赖启用。
 
 > 目标不是再做一个“看起来能回答”的 Demo，而是让一次 Agent 修改能够被测试、比较、诊断和安全地回归。
 
-项目使用 Python 标准库，Python 3.10+；不需要 API Key、外部大模型、向量数据库或网络服务。
+Python 3.10+。受控回归不需要API Key、外部大模型、向量数据库或网络服务；Schema 3.0可接收任意外部Agent生成的语义判断，但不在仓库中绑定模型供应商或保存密钥。
+
+## 两套基线，不混用数字
+
+| 基线 | 用途 | 当前公开证据 |
+|---|---|---|
+| NovaLab受控回归 | 验证检索、动态证据、工具边界和失败分类不会回退 | 15条固定用例；任务通过率与引用P/R/F1均为100% |
+| 真实知识库Schema 3.0 | 检查PDF物理页、Obsidian标题、自然硬负例和语义选证据 | 32条：任务通过率93.75%，候选召回100%，最终证据P/R/F1均92.31%，硬负例正确拒答100% |
+
+受控回归的100%不代表真实知识库或线上业务效果。旧版10题初测的Precision 100%、Recall 90.7%、F1 94.1%、任务通过率60%只保留在[真实知识库案例](docs/real-kb-case-study.md)中作为历史问题记录。
+
+## Schema 3.0：接入真实PDF与Obsidian
+
+```mermaid
+flowchart LR
+    T["Trove：存储 / OCR / 摘要 / 语义搜索"] --> TS["Trove Sync"]
+    TS --> O["Obsidian：离线阅读 / 标注 / 链接"]
+    P["本地PDF镜像"] --> M["Manifest + SHA256"]
+    O --> M
+    M --> C["物理页 / 标题稳定切块"]
+    C --> B["BM25 Top 20候选"]
+    B --> S["外部Agent语义判断"]
+    S --> V["候选ID校验"]
+    V --> F["回答 / 费曼反馈"]
+    V --> E["Schema 3.0评测与轨迹"]
+```
+
+Trove是上游“AI图书馆”，负责存储、OCR、AI摘要、语义搜索和AI问答；Trove Sync把处理后的内容同步到Obsidian。Obsidian是本地笔记本，负责离线阅读、标注、链接和知识网络。Harness读取PDF镜像和Obsidian Markdown，在两者之上补稳定引用、评测、失败分类和轨迹；它不替代Trove或Obsidian。
+
+### 1. 配置本地来源
+
+复制[`kb_sources.example.toml`](kb_sources.example.toml)为被Git忽略的`kb_sources.local.toml`，填写自己的PDF目录和Obsidian Vault。Obsidian连接器默认排除`.obsidian/`、`.git/`、`node_modules/`和隐藏目录。
+
+### 2. 建立稳定索引
+
+```bash
+python3 -m pip install -e ".[pdf]"
+python3 -m rag_harness.cli index build \
+  --config kb_sources.local.toml \
+  --output .local/index.json \
+  --cache-dir .local/source_cache
+```
+
+- PDF按物理页提取，长页再分块，引用为`doc_id + pdf-page=N + chunk=M`；
+- Obsidian按标题切块，引用为`doc_id + heading + chunk`；
+- `doc_id`来自来源类型和相对路径的哈希，公共报告不暴露用户名和绝对路径；
+- 空白扫描页标记`ocr_required`，不会静默跳过；
+- 内容SHA256用于增量重建、删除孤立索引和绑定评测manifest。
+
+### 3. 取得候选而不是伪装成答案
+
+```bash
+python3 -m rag_harness.cli retrieve "实践对认识的决定作用是什么？" \
+  --index .local/index.json \
+  --aspect "实践是认识的来源" \
+  --aspect "实践是认识发展的动力" \
+  --aspect "实践是认识的目的" \
+  --aspect "实践是检验认识真理性的唯一标准"
+```
+
+Harness返回最多8个脱敏候选及`no_lexical_match`、`weak_match`或`candidates_found`。这三个状态只描述词法层，`candidates_found`不等于“知识库能回答”。外部Agent需要输出`answerable`、`insufficient_evidence`或`needs_clarification`，并且只能选择候选集合中的`chunk_id`：
+
+```bash
+python3 -m rag_harness.cli validate-semantic \
+  --bundle .local/current_bundle.json \
+  --decision .local/current_decision.json
+```
+
+越界ID会直接返回`invalid_semantic_selection`。仓库不直接调用模型；实际部署中可由Hermes等Agent管理模型、Prompt版本和API Key。
+
+### 4. 运行Schema 3.0评测
+
+```bash
+python3 -m rag_harness.cli eval-v3 \
+  --cases eval_kb_cases.local.json \
+  --index .local/index.json \
+  --semantic-decisions .local/semantic_decisions.json \
+  --output .local/kb_eval_report.json
+```
+
+当前真实索引包含173份文档：69份PDF和104份Obsidian Markdown，共10,617个稳定切块。32条真实用例包含26条可回答问题和6条共享领域词汇的自然硬负例，其中多条是多要点问题。黄金证据必须在运行前由人阅读PDF页或笔记小节后标注，并绑定`source_manifest_sha256`。报告分开计算：
+
+- 候选Group Recall：BM25有没有把黄金证据送进候选；
+- Evidence Precision / Group Recall / F1：语义层最终选择是否准确完整；
+- 硬负例边界准确率和语义判断覆盖率；
+- 引用定位有效率、索引加载、BM25与整题延迟。
+
+未提供外部语义判断时，`semantic_decision_coverage`不会通过质量门槛，避免把BM25候选误写成最终引用。
+
+本次公开报告中，BM25候选Group Recall为100%，说明黄金证据都进入了候选；Flash在26条可回答题中有2条误判为证据不足，因此最终证据P/R/F1和要点覆盖率均为92.31%，总体任务通过率93.75%。6条自然硬负例全部正确拒答。这个失败分类比只写“准确率92.31%”更能说明下一步应优化语义Prompt/模型，而不是先换检索器。
+
+### 5. 增量同步与回滚
+
+```bash
+python3 -m rag_harness.cli sync \
+  --config kb_sources.local.toml \
+  --eval-cases eval_kb_cases.local.json \
+  --semantic-decisions .local/semantic_decisions.json \
+  --index .local/index.json \
+  --report .local/kb_eval_report.json
+```
+
+同步使用“候选索引 → 固定评测 → 达标后原子替换”。评测失败时保留上一版可用索引，并留下被拒绝候选供诊断。部署调度器可以每小时调用该命令；仓库不包含用户名、任务ID或硬编码本地路径的定时脚本。
+
+### 6. 公开脱敏证据
+
+```bash
+python3 -m rag_harness.cli public-export \
+  --cases eval_kb_cases.local.json \
+  --report .local/kb_eval_report.json \
+  --index .local/index.json \
+  --output-cases eval_kb_cases.public.json \
+  --output-report artifacts/kb_eval_report.public.json
+```
+
+导出前会扫描Windows/WSL绝对路径、邮箱和凭据模式。GitHub只提交连接器代码、匿名用例和不含原文/轨迹的汇总报告；PDF、Vault、索引、私有用例和原始轨迹均被Git忽略。
 
 ## 当前能验证什么
 
@@ -16,7 +131,7 @@
 - BM25 检索、复合问题分解、动态证据数量和 Token 预算；
 - `no_result`、超时、参数错误、工具越权和 Checkpoint 续跑；
 - JSONL 轨迹记录候选证据、选择原因、拒绝原因和失败类型；
-- 16 项自动测试与 GitHub Actions 持续验证。
+- 16 项受控Harness测试；加上Schema 3.0连接器、隐私、同步和费曼评测后共46项自动测试，由GitHub Actions持续验证。
 
 ## 使用了什么例子
 
@@ -96,16 +211,16 @@ cd rag-agent-harness
 python3 --version
 ```
 
-### 2. 运行16项自动测试
+### 2. 运行自动测试
 
 ```bash
 python3 -m unittest discover -s tests -v
 ```
 
-预期结尾：
+当前预期结尾：
 
 ```text
-Ran 16 tests
+Ran 46 tests
 OK
 ```
 
@@ -245,6 +360,8 @@ docs/
 .github/workflows/ci.yml     Push/PR自动测试与评测
 ```
 
+Schema 3.0新增模块：`sources.py`（PDF/Obsidian连接器与manifest）、`retrieve.py`（候选bundle与语义ID校验）、`evaluation_v3.py`（分层指标）、`sync.py`（增量构建与原子替换）、`privacy.py`（公共产物脱敏）、`feynman_evaluation.py`（8条费曼反馈的结构化评分）。
+
 ## 工程迭代记录
 
 - [完整工程日志：从可运行Demo到可回归基线](docs/engineering-log.md)
@@ -257,7 +374,7 @@ docs/
 
 | 当前实现 | 可替换为 |
 |---|---|
-| 本地 Markdown/TXT | Trove、企业知识库、对象存储 |
+| 本地 PDF/Obsidian Markdown | Trove Sync后的笔记、企业知识库、对象存储 |
 | BM25 | Elasticsearch、Qdrant/Milvus混合检索、Cross-Encoder重排 |
 | 抽取式回答器 | OpenAI-compatible LLM或私有模型 |
 | 本地 JSONL | LangFuse、OpenTelemetry、集中日志平台 |
