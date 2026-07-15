@@ -46,7 +46,8 @@ def sha256_file(path: Path) -> str:
 
 
 def public_doc_id(source_type: str, relative_path: str) -> str:
-    normalized = f"{source_type}:{relative_path.replace('\\\\', '/').lower()}"
+    normalized_path = relative_path.replace("\\", "/").lower()
+    normalized = f"{source_type}:{normalized_path}"
     return "doc_" + hashlib.sha256(normalized.encode("utf-8")).hexdigest()[:12]
 
 

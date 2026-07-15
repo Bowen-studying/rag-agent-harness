@@ -7,7 +7,7 @@ name = "rag-agent-harness"
 version = "0.3.0"
 description = "A provider-neutral RAG agent harness with adaptive evidence selection, deterministic evaluation, and JSONL traces."
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 license = {text = "MIT"}
 authors = [{name = "Bowen Zou"}]
 dependencies = []
