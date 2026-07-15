@@ -356,6 +356,7 @@ artifacts/
 docs/
   engineering-log.md        逐轮问题、证据、决策和结果
   citation-accuracy-fix.md   第一轮引用精确率修复记录
+  citation-recall-gap.md     第二轮引用召回缺口诊断记录
   adding-eval-cases.md       新增问题与解释报告的指南
 .github/workflows/ci.yml     Push/PR自动测试与评测
 ```
@@ -365,7 +366,8 @@ Schema 3.0新增模块：`sources.py`（PDF/Obsidian连接器与manifest）、`r
 ## 工程迭代记录
 
 - [完整工程日志：从可运行Demo到可回归基线](docs/engineering-log.md)
-- [第一轮：引用精确率90% → 100%](docs/citation-accuracy-fix.md)
+  - [迭代1详录（历史方案）：引用精确率90% → 100%](docs/citation-accuracy-fix.md)
+  - [迭代2详录（历史诊断）：把引用召回缺口变成可失败的测试](docs/citation-recall-gap.md)
 - [怎样新增自己的评测问题](docs/adding-eval-cases.md)
 
 日志保留了被放弃的方案、失败基线和后续纠错，不把中间阶段改写成“一开始就设计正确”。

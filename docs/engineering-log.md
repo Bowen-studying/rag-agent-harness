@@ -21,7 +21,7 @@
 
 ## 迭代1：减少弱相关引用
 
-详细过程见 [`citation-accuracy-fix.md`](citation-accuracy-fix.md)。
+详细过程见[迭代1详录（历史方案）](citation-accuracy-fix.md)。
 
 ### 触发证据
 
@@ -39,6 +39,8 @@
 这轮结果因此被保留为中间阶段，而不是最终方案。
 
 ## 迭代2：把召回缺口变成可失败的测试
+
+详细过程见[迭代2详录（历史诊断）](citation-recall-gap.md)。
 
 ### 新增用例
 
