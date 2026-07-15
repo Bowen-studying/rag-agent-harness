@@ -4,4 +4,4 @@ __pycache__/
 .venv/
 artifacts/traces/*.jsonl
 artifacts/checkpoints/*.json
-
+artifacts/*.local.json
