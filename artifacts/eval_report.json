@@ -1,5 +1,10 @@
 {
   "schema_version": "2.0",
+  "baseline": {
+    "id": "novalab_controlled",
+    "label": "NovaLab controlled regression (Schema 2.0)",
+    "comparison_warning": "NovaLab controlled regression and real-KB Schema 3.0 scores are not directly comparable: they use different datasets, difficulty levels and scoring rules. Do not pool them or present their difference as a quality improvement or regression. Controlled scores do not establish real-KB or production performance. A baseline label identifies the evaluation track, not the published run; scores apply only to this report's cases, sources and configuration."
+  },
   "config": {
     "default_top_k": 5,
     "min_global_score_ratio": 0.45,
