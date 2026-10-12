@@ -17,6 +17,15 @@ Python 3.11+。受控回归不需要API Key、外部大模型、向量数据库�
 
 受控回归的100%不代表真实知识库或线上业务效果。旧版10题初测的Precision 100%、Recall 90.7%、F1 94.1%、任务通过率60%只保留在[真实知识库案例](docs/real-kb-case-study.md)中作为历史问题记录。
 
+### CLI 和报告中的基线标识
+
+`eval`（包括 `rag-eval`）和 `eval-v3` 的终端 JSON、保存的报告以及 `public-export` 导出的报告都会包含 `baseline`，其中有稳定的 `id`、可读的 `label` 和 `comparison_warning`。演示或截图请保留这段说明，不要只截取通过率：两类结果的数据、难度和评分规则不同，不能直接横比、合并，或把差值解释为质量提升或退步。
+
+- `novalab_controlled`：输入内容与仓库内置 NovaLab 用例和文档一致的 Schema 2.0 受控回归；自定义用例或文档标记为 `custom_schema2`。复制文件或改变 JSON 排版不会改变识别结果。
+- `real_kb_schema3`：Schema 3.0 真实知识库检索评测轨道；该标识不表示每次运行都是上表的 32 条公开评测。比较同一轨道的结果仍需核对用例、来源 manifest 和配置。
+
+标识和提示只增加说明，不改变评分、质量门槛或退出码。原有数字字段位置保持不变：`eval` 仍为顶层 `task_pass_rate`，`eval-v3` 仍为 `summary.retrieval_task_pass_rate`。同步生成的评测报告同样带有标识。导出旧 Schema 3.0 报告时会补充轨道说明；其他缺少标识的旧报告标记为 `unidentified`，不会根据分数或用例数量推断基线。费曼反馈评分是另一项任务，不属于这里的两套基线。
+
 ## Schema 3.0：接入真实PDF与Obsidian
 
 ```mermaid
@@ -131,7 +140,7 @@ python3 -m rag_harness.cli public-export \
 - BM25 检索、复合问题分解、动态证据数量和 Token 预算；
 - `no_result`、超时、参数错误、工具越权和 Checkpoint 续跑；
 - JSONL 轨迹记录候选证据、选择原因、拒绝原因和失败类型；
-- 16 项受控Harness测试；加上Schema 3.0连接器、隐私、同步和费曼评测后共46项自动测试，由GitHub Actions持续验证。
+- 16 项受控Harness测试；加上Schema 3.0连接器、隐私、同步、费曼评测和基线标识后共56项自动测试，由GitHub Actions持续验证。
 
 ## 使用了什么例子
 

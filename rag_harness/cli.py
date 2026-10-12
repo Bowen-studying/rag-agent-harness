@@ -52,7 +52,7 @@ def eval_main(argv: list[str] | None = None) -> int:
         min_global_score_ratio=args.min_score_ratio,
         max_evidence_tokens=args.max_evidence_tokens,
     )
-    print(json.dumps(report["summary"], ensure_ascii=False, indent=2))
+    print(json.dumps({"baseline": report["baseline"], **report["summary"]}, ensure_ascii=False, indent=2))
     return 0 if report["summary"]["task_pass_rate"] >= args.fail_under else 1
 
 
@@ -186,7 +186,7 @@ def main(argv: list[str] | None = None) -> int:
             semantic_decisions_path=args.semantic_decisions,
         )
         passed, failures = quality_gate(report)
-        print(json.dumps({"summary": report["summary"], "quality_gate_passed": passed, "failures": failures}, ensure_ascii=False, indent=2))
+        print(json.dumps({"baseline": report["baseline"], "summary": report["summary"], "quality_gate_passed": passed, "failures": failures}, ensure_ascii=False, indent=2))
         return 0 if passed else 1
     if args.command == "eval-feynman":
         from .feynman_evaluation import evaluate_feynman_predictions

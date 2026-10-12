@@ -5,6 +5,7 @@ import statistics
 import time
 from pathlib import Path
 
+from .baselines import baseline_metadata
 from .retrieve import retrieve_candidates, validate_semantic_decision
 from .sources import load_index
 
@@ -201,6 +202,7 @@ def evaluate_v3(
     }
     report = {
         "schema_version": SCHEMA_VERSION,
+        "baseline": baseline_metadata("real_kb_schema3"),
         "index_manifest_sha256": manifest["manifest_sha256"],
         "config": {
             "candidate_top_k": candidate_top_k,

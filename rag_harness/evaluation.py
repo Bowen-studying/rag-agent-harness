@@ -6,6 +6,7 @@ from collections import defaultdict
 from pathlib import Path
 
 from .agent import AgentHarness
+from .baselines import schema2_baseline
 from .retrieval import DocumentIndex
 
 
@@ -190,6 +191,7 @@ def evaluate_cases(
     }
     report = {
         "schema_version": SCHEMA_VERSION,
+        "baseline": schema2_baseline(cases, index.chunks),
         "config": {
             "default_top_k": default_top_k,
             "min_global_score_ratio": min_global_score_ratio,

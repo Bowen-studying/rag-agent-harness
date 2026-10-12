@@ -5,6 +5,8 @@ import re
 from collections import Counter
 from pathlib import Path
 
+from .baselines import baseline_metadata
+
 
 SENSITIVE_PATTERNS = {
     "windows_path": re.compile(r"[A-Za-z]:\\"),
@@ -62,6 +64,9 @@ def export_public_artifacts(
         )
     public_report = {
         "schema_version": report["schema_version"],
+        "baseline": report.get("baseline", baseline_metadata(
+            "real_kb_schema3" if report["schema_version"] == "3.0" else "unidentified"
+        )),
         "index_manifest": public_manifest(index_payload["manifest"]),
         "config": report["config"],
         "summary": report["summary"],
